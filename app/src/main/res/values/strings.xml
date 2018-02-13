@@ -6,8 +6,10 @@
     <string name="lst_categorias">Categorias</string>
     <string name="btn_ver">Ver</string>
     <string name="btn_buscar">Buscar</string>
-
     <string name="vsb_scroll"></string>
+
+    <!--activity_ver-->
+
 
 
 
