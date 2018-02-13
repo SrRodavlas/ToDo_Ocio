@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">ToDo_Ocio</string>
+
+    <!--activity_lista-->
+
+    <string name="lst_categorias">Categorias</string>
+    <string name="btn_ver">Ver</string>
+    <string name="btn_buscar">Buscar</string>
+
+    <string name="vsb_scroll"></string>
+
+
+
+
 </resources>
