@@ -10,7 +10,35 @@
 
     <!--activity_ver-->
 
+    <string name="lbl_Nombre">Nombre</string>
+    <string name="lbl_NombreLugar">...</string>
+    <string name="lbl_Bio">Añada una descripción</string>
+    <string name="mpv_Localizacion"></string>
+    <string name="rtnBar"></string>
+    <string name="img_Foto"></string>
+    <string name="btn_guardar">Guardar</string>
 
+    <!--activity_nuevo-->
+
+    <string name="lbl_vNombre">Nombre del lugar</string>
+    <string name="lbl_vBio">Aquí va la descripción del lugar proporcionada</string>
+    <string name="mpv_vLocalizacion"></string>
+    <string name="rtn_vBar"></string>
+    <string name="img_vFoto"></string>
+    <string name="btn_editar">Editar</string>
+
+    <!--activity_mapa-->
+
+    <string name="chk_cine">Cines</string>
+    <string name="chk_parque">Parques</string>
+    <string name="chk_restaurante">Restaurantes</string>
+    <string name="chk_todo">Todos</string>
+    <string name="mpv_mapa"></string>
+
+
+    <!--menu-->
+
+    <string name="action_save">action_save</string>
 
 
 

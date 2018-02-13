@@ -11,16 +11,72 @@
         android:id="@+id/btn_borrar"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/delete"
-        tools:layout_editor_absoluteX="319dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_guardar"
+        android:id="@+id/btn_editar"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/save"
-        tools:layout_editor_absoluteX="269dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:layout_marginStart="269dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edit"
+        app:layout_constraintEnd_toStartOf="@+id/btn_borrar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lbl_vNombre"
+        android:layout_width="309dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="11dp"
+        android:text="@string/lbl_vNombre"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_borrar" />
+
+    <EditText
+        android:id="@+id/lbl_vBio"
+        android:layout_width="341dp"
+        android:layout_height="146dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="17dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:text="@string/lbl_vBio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_vNombre" />
+
+    <RatingBar
+        android:id="@+id/rtn_vBar"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_marginBottom="23dp"
+        android:layout_marginEnd="72dp"
+        app:layout_constraintBottom_toTopOf="@+id/mpv_vLocalizacion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_vBio" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mpv_vLocalizacion"
+        android:layout_width="160dp"
+        android:layout_height="133dp"
+        android:layout_marginBottom="37dp"
+        android:layout_marginStart="22dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_vFoto"
+        android:layout_width="160dp"
+        android:layout_height="133dp"
+        android:layout_marginBottom="37dp"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/btn_new" />
 
 </android.support.constraint.ConstraintLayout>
