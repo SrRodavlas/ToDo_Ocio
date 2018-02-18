@@ -14,6 +14,7 @@
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="142dp"
         android:layout_marginStart="142dp"
+        android:onClick="ejeccutar_mapa"
         android:text="@string/btn_buscar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,13 +55,16 @@
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_nuevo"
         android:layout_width="70dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="368dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:clickable="true"
+        android:onClick="ejeccutar_nuevo"
         app:backgroundTint="@android:color/holo_red_dark"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_buscar"
+        app:layout_constraintTop_toBottomOf="@+id/vsb_scroll"
         app:srcCompat="@android:drawable/ic_input_add" />
 
 </android.support.constraint.ConstraintLayout>

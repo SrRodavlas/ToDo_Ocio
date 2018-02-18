@@ -8,7 +8,7 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/btn_borrar"
+        android:id="@+id/btn_Borrar"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="15dp"
@@ -18,16 +18,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/lbl_Bio"
+        android:id="@+id/txt_bio"
         android:layout_width="341dp"
-        android:layout_height="146dp"
+        android:layout_height="139dp"
         android:layout_marginStart="22dp"
         android:layout_marginTop="13dp"
         android:ems="10"
         android:inputType="textMultiLine"
         android:text="@string/lbl_vBio"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_nombreLugar" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_nombreLugar" />
 
     <RatingBar
         android:id="@+id/rtnBar"
@@ -38,7 +38,7 @@
         android:layout_marginTop="11dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_Bio" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_bio" />
 
     <ImageView
         android:id="@+id/img_Foto"
@@ -57,13 +57,13 @@
         android:layout_marginEnd="6dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="81dp"
-        android:text="@string/lbl_Nombre"
-        app:layout_constraintEnd_toStartOf="@+id/lbl_nombreLugar"
+        android:text="@string/lbl_vNombre"
+        app:layout_constraintEnd_toStartOf="@+id/txt_nombreLugar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/lbl_nombreLugar"
+        android:id="@+id/txt_nombreLugar"
         android:layout_width="228dp"
         android:layout_height="34dp"
         android:layout_marginEnd="22dp"
@@ -72,7 +72,7 @@
         android:text="@string/lbl_NombreLugar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/lbl_Lugar"
-        app:layout_constraintTop_toBottomOf="@+id/btn_borrar" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_Borrar" />
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mpv_Localizacion"
@@ -82,5 +82,51 @@
         android:layout_marginStart="46dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/id_radioGroup"
+        android:layout_width="305dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/rdb_nCine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:checked="false"
+            android:text="@string/rdb_nCine"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioButton
+            android:id="@+id/rdb_nParque"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:checked="false"
+            android:text="@string/rdb_nParque"
+            app:layout_constraintStart_toEndOf="@+id/rdb_nCine"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioButton
+            android:id="@+id/rdb_nRestaurante"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:checked="false"
+            android:text="@string/rdb_nRestaurante"
+            app:layout_constraintStart_toEndOf="@+id/rdb_nParque"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </RadioGroup>
 
 </android.support.constraint.ConstraintLayout>

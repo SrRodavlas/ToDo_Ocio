@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+    <Button
+        android:id="@+id/btn_Borrar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/img_Foto" />
+
+    <EditText
+        android:id="@+id/txt_bio"
+        android:layout_width="341dp"
+        android:layout_height="146dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:text="@string/lbl_vBio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_nombreLugar" />
+
+    <RatingBar
+        android:id="@+id/rtnBar"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/btn_Borrar"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_bio" />
+
+    <ImageView
+        android:id="@+id/img_Foto"
+        android:layout_width="160dp"
+        android:layout_height="133dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="13dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mpv_Localizacion"
+        app:srcCompat="@drawable/btn_new" />
+
+    <TextView
+        android:id="@+id/lbl_Lugar"
+        android:layout_width="112dp"
+        android:layout_height="33dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/lbl_vNombre"
+        app:layout_constraintBottom_toTopOf="@+id/txt_bio"
+        app:layout_constraintEnd_toStartOf="@+id/txt_nombreLugar"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_nombreLugar"
+        android:layout_width="228dp"
+        android:layout_height="34dp"
+        android:layout_marginEnd="57dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/lbl_NombreLugar"
+        app:layout_constraintEnd_toStartOf="@+id/mpv_Localizacion"
+        app:layout_constraintStart_toEndOf="@+id/lbl_Lugar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mpv_Localizacion"
+        android:layout_width="160dp"
+        android:layout_height="133dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="572dp" />
+
+</android.support.constraint.ConstraintLayout>

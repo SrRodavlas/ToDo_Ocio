@@ -7,6 +7,7 @@
     <string name="btn_ver">Ver</string>
     <string name="btn_buscar">Buscar</string>
     <string name="vsb_scroll"></string>
+    <string name="btn_provisional">BtnProv</string> <!--este boton hace lo que haría seleccionar un elemento en la lista. provisional-->
 
     <!--activity_ver-->
 
@@ -20,12 +21,15 @@
 
     <!--activity_nuevo-->
 
-    <string name="lbl_vNombre">Nombre del lugar</string>
+    <string name="lbl_vNombre">Nombre del lugar:</string>
     <string name="lbl_vBio">Aquí va la descripción del lugar proporcionada</string>
     <string name="mpv_vLocalizacion"></string>
     <string name="rtn_vBar"></string>
     <string name="img_vFoto"></string>
     <string name="btn_editar">Editar</string>
+    <string name="rdb_nCine">Cine</string>
+    <string name="rdb_nParque">Parque</string>
+    <string name="rdb_nRestaurante">Restaurante</string>
 
     <!--activity_mapa-->
 
