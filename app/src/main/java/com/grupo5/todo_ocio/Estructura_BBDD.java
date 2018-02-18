@@ -24,6 +24,7 @@ public class Estructura_BBDD {
     private static final String COMMA_SEP = ","; //separador de los campos
     private static final float GPS_TYPE = (float) 0.0;
 
+    //hay que especificar el tipo de datos para puntuacion, imagen y las coordenadas
     protected static final String SQL_CREATE_ENTRIES =
                 "CREATE TABLE " + Estructura_BBDD.TABLE_NAME + " (" +
                         Estructura_BBDD.id + " INTEGER PRIMARY KEY," +

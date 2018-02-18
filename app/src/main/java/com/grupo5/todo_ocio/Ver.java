@@ -29,15 +29,16 @@ public class Ver extends Activity{
 
     //Funcionalidad del botón editar
     @SuppressLint("WrongViewCast")
+
     public void ejeccutar_editar(View view){
-        Intent i = new Intent(this, Nuevo.class);
+        Intent i = new Intent(this, Editar.class);
 
         i.putExtra("nombre", txt_vNombreLugar.getText());
         i.putExtra("bio", txt_vBio.getText());
 
         startActivity(i);
 
-        btn_Borrar = (Button)findViewById(R.id.btn_Borrar);
+        btn_Borrar = (Button)findViewById(R.id.btn_nGuardar);
         txt_vNombreLugar = (EditText)findViewById(R.id.lbl_vNombre);
         txt_vBio = (EditText)findViewById(R.id.lbl_vBio);
         rtn_vBar = (RatingBar)findViewById(R.id.rtn_vBar);

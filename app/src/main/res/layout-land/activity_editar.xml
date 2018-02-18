@@ -11,8 +11,7 @@
         android:id="@+id/btn_nGuardar"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginEnd="348dp"
         android:background="@drawable/save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,8 +20,8 @@
         android:id="@+id/txt_nBio"
         android:layout_width="341dp"
         android:layout_height="139dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="13dp"
+        android:layout_marginStart="232dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textMultiLine"
         android:text="@string/lbl_vBio"
@@ -30,13 +29,14 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_nNombreLugar" />
 
     <RatingBar
-        android:id="@+id/rtn_nBar"
+        android:id="@+id/rtn_eBar"
         android:layout_width="wrap_content"
         android:layout_height="44dp"
         android:layout_marginEnd="72dp"
         android:layout_marginStart="72dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.769"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_nBio" />
 
@@ -44,8 +44,8 @@
         android:id="@+id/img_nFoto"
         android:layout_width="160dp"
         android:layout_height="133dp"
-        android:layout_marginBottom="37dp"
-        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="416dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/btn_new" />
@@ -54,32 +54,28 @@
         android:id="@+id/lbl_nLugar"
         android:layout_width="112dp"
         android:layout_height="33dp"
-        android:layout_marginEnd="6dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="81dp"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="8dp"
         android:text="@string/lbl_vNombre"
-        app:layout_constraintEnd_toStartOf="@+id/txt_nNombreLugar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/id_radioGroup" />
 
     <TextView
         android:id="@+id/txt_nNombreLugar"
         android:layout_width="228dp"
         android:layout_height="34dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/lbl_NombreLugar"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/lbl_nLugar"
-        app:layout_constraintTop_toBottomOf="@+id/btn_nGuardar" />
+        app:layout_constraintTop_toBottomOf="@+id/id_radioGroup" />
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mpv_nLocalizacion"
         android:layout_width="160dp"
         android:layout_height="133dp"
-        android:layout_marginBottom="38dp"
-        android:layout_marginStart="46dp"
+        android:layout_marginBottom="160dp"
+        android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -87,15 +83,14 @@
         android:id="@+id/id_radioGroup"
         android:layout_width="305dp"
         android:layout_height="53dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="296dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <RadioButton
-            android:id="@+id/rdb_nCine"
+            android:id="@+id/rdb_eCine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -117,7 +112,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <RadioButton
-            android:id="@+id/rdb_nRestaurante"
+            android:id="@+id/rdb_eRestaurante"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"

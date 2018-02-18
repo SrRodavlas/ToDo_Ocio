@@ -26,7 +26,6 @@
     <string name="mpv_vLocalizacion"></string>
     <string name="rtn_vBar"></string>
     <string name="img_vFoto"></string>
-    <string name="btn_editar">Editar</string>
     <string name="rdb_nCine">Cine</string>
     <string name="rdb_nParque">Parque</string>
     <string name="rdb_nRestaurante">Restaurante</string>
@@ -38,6 +37,18 @@
     <string name="chk_restaurante">Restaurantes</string>
     <string name="chk_todo">Todos</string>
     <string name="mpv_mapa"></string>
+
+    <!--activity_editar-->
+
+    <string name="lbl_eNombre">Nombre del lugar:</string>
+    <string name="lbl_eBio">Aquí va la descripción del lugar proporcionada</string>
+    <string name="mpv_eLocalizacion"></string>
+    <string name="rtn_eBar"></string>
+    <string name="img_eFoto"></string>
+    <string name="btn_editar">Editar</string>
+    <string name="rdb_eCine">Cine</string>
+    <string name="rdb_eParque">Parque</string>
+    <string name="rdb_eRestaurante">Restaurante</string>
 
 
     <!--menu-->
