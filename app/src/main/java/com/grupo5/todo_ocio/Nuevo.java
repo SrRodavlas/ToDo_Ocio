@@ -12,9 +12,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.android.gms.maps.MapView;
+
+import org.w3c.dom.Text;
 
 public class Nuevo extends Activity {
 
@@ -22,8 +26,10 @@ public class Nuevo extends Activity {
     EditText txt_nombreLugar, txt_bio;
     ImageView img_Foto;
     MapView mpv_Localizacion;
-    RatingBar rtnBar;
+    static RatingBar rtnBar;
+    static TextView txtRating;
     RadioGroup id_radioGroup;
+
 
     @SuppressLint("WrongViewCast")
 
@@ -40,11 +46,15 @@ public class Nuevo extends Activity {
         mpv_Localizacion = (MapView)findViewById(R.id.mvp_mapa);
         rtnBar = (RatingBar)findViewById(R.id.rtnBar);
         id_radioGroup = (RadioGroup)findViewById(R.id.id_radioGroup);
+        txtRating = (TextView)findViewById(R.id.rtbText);
+
+        rtnBarFunctionality();
 
         //Para acceder a la BD se crea una instancia de la subclase SQLiteOpenHelper
         final BBDD_Metodos_helper helper = new BBDD_Metodos_helper(this);
 
         //Botón para insertar los datos en la BD
+
         btn_Guardar.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -54,6 +64,7 @@ public class Nuevo extends Activity {
 
                 /* Se indica la clase donde se ha definido la estructura de la BD + el nombre del campo +
                    donde está la info nueva + más los métodos necesarios
+                   faltan los datos de mapa, imagen... que hay que averiguar como recogerlos
                  */
                 ContentValues values = new ContentValues();
                 values.put(Estructura_BBDD.nombre,txt_nombreLugar.getText().toString());
@@ -63,11 +74,26 @@ public class Nuevo extends Activity {
                 //values.put(Estructura_BBDD.imagen, img_Foto.get);
                 //values.put(Estructura_BBDD.latitud, mpv_Localizacion.get);
 
-// Insert the new row, returning the primary key value of the new row
+                // Insert the new row, returning the primary key value of the new row
+                //Aquí se guarda el valor del id de la nueva fila creada
                 long newRowId = db.insert(Estructura_BBDD.TABLE_NAME, null, values);
+
+                Toast.makeText(getApplicationContext(), "Registro guardado, id: " +
+                        newRowId, Toast.LENGTH_LONG).show();
 
             }
         });
 
+    }
+
+    //Funcionalidad RatingBar
+    public static void rtnBarFunctionality() {
+        rtnBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                txtRating.setText(String.valueOf(rating));
+            }
+
+        });
     }
 }

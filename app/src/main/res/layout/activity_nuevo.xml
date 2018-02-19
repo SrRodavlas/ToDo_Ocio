@@ -129,4 +129,11 @@
 
     </RadioGroup>
 
+    <TextView
+        android:id="@+id/rtbText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="310dp"
+        tools:layout_editor_absoluteY="303dp" />
+
 </android.support.constraint.ConstraintLayout>
