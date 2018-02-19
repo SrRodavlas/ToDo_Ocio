@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.grupo5.todo_ocio">
 
+    <!---PERMISOS-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
     <uses-permission android:name="android.permission.READ_LOGS"/>
@@ -24,11 +25,24 @@
         </activity>
 
         <activity android:name=".Mapa"
-            android:theme="@style/Theme.AppCompat">
+            android:theme="@style/Theme.AppCompat"
+            android:parentActivityName=".Lista">
         </activity>
 
-        <activity android:name=".Nuevo"></activity>
-        <activity android:name=".Ver"></activity>
+        <activity android:name=".Nuevo"
+            android:parentActivityName=".Lista">
+        </activity>
+        <activity
+            android:name=".Ver"
+            android:parentActivityName=".Lista" />
+        <activity android:name=".Editar"
+            android:parentActivityName=".Lista">
+        </activity>
+
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".Lista"/>
+
     </application>
 
 </manifest>

@@ -13,11 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="11dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:text="@string/chk_cine"
         app:layout_constraintBottom_toTopOf="@+id/chk_restaurante"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <CheckBox
         android:id="@+id/chk_parque"

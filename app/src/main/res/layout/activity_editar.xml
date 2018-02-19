@@ -23,11 +23,12 @@
         android:layout_height="136dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textMultiLine"
         android:text="@string/lbl_vBio"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_eNombreLugar" />
 
@@ -58,21 +59,21 @@
         android:layout_height="33dp"
         android:layout_marginEnd="6dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="81dp"
+        android:layout_marginTop="13dp"
         android:text="@string/lbl_vNombre"
         app:layout_constraintEnd_toStartOf="@+id/txt_nNombreLugar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/id_eRadioGroup" />
 
     <TextView
         android:id="@+id/txt_eNombreLugar"
         android:layout_width="228dp"
         android:layout_height="34dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginTop="13dp"
         android:text="@string/lbl_NombreLugar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_radioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_eGuardar" />
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mpv_eLocalizacion"

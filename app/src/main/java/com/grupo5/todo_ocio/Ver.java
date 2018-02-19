@@ -11,6 +11,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +34,7 @@ public class Ver extends Activity{
     ImageView img_vFoto;
     MapView mpv_vLocalizacion;
     RatingBar rtn_vBar;
+    Button edit;
 
     //Para acceder a la BD se crea una instancia de la subclase SQLiteOpenHelper
     final BBDD_Metodos_helper helper = new BBDD_Metodos_helper(this);
@@ -49,6 +52,7 @@ public class Ver extends Activity{
         rtn_vBar = (RatingBar) findViewById(R.id.rtn_vBar);
         mpv_vLocalizacion = (MapView) findViewById(R.id.mpv_vLocalizacion);
         img_vFoto = (ImageView) findViewById(R.id.img_vFoto);
+        edit = (Button)findViewById(R.id.action_edit); //botón del menú barra
 
 
         //Eliminar registros base de datos al pulsar botón borrar
@@ -72,6 +76,12 @@ public class Ver extends Activity{
                 txt_vBio.setText("");
             }
         });
+
+//        edit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//            }
+//        });
     }
 
 
@@ -81,8 +91,8 @@ public class Ver extends Activity{
 
         Intent i = new Intent(this, Editar.class);
 
-        i.putExtra("nombre", txt_vNombreLugar.getText());
-        i.putExtra("bio", txt_vBio.getText());
+        //i.putExtra("nombre", txt_vNombreLugar.getText());
+        //i.putExtra("bio", txt_vBio.getText());
         //i.putExtra("imagen",img_vFoto.getDrawingCache());
 
         //obtener la imagen?--------------------------------------------------------------
@@ -110,8 +120,17 @@ public class Ver extends Activity{
         //---------------------------------------------------------------------------------------------
 
         startActivity(i);
-
-
     }
 
+    //menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        if (super.onCreateOptionsMenu(menu)) return true;
+        else return false;
+    }
 }
+
+
