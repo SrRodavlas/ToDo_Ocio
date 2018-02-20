@@ -9,16 +9,13 @@
 
     <Button
         android:id="@+id/btn_buscar"
-        android:layout_width="308dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="17dp"
-        android:layout_marginEnd="36dp"
         android:onClick="ejeccutar_mapa"
         android:text="@string/btn_buscar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vsb_scroll"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        style="@style/fabulousStyle" />
 
     <ScrollView
         android:id="@+id/vsb_scroll"
@@ -36,7 +33,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
         </LinearLayout>
 
@@ -53,16 +50,14 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_nuevo"
-        android:layout_width="70dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="368dp"
-        android:clickable="true"
         android:onClick="ejecutar_nuevo"
-        app:backgroundTint="@android:color/holo_red_dark"
+
+        app:layout_constraintBottom_toTopOf="@+id/btn_buscar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@android:drawable/ic_input_add"
+        app:backgroundTint="@android:color/holo_red_dark"
+        style="@style/boton_flotante" />
 
     <Button
         android:id="@+id/btn_provisional"

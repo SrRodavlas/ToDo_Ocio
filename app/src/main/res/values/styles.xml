@@ -8,4 +8,30 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="fabulousStyle">
+        <item name="android:layout_width">308dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">17dp</item>
+        <item name="android:layout_marginEnd">36dp</item>
+    </style>
+
+    <style name="WhateverTheme" parent="Theme.AppCompat.NoActionBar" >
+        <item name="colorPrimary">@color/colorPrincipal</item>
+        <item name="colorPrimaryDark">@color/colorPrincipalOscuro</item>
+        <item name="colorAccent">@color/colorEspecial</item>
+        <item name="android:textColorPrimary">@color/text_color_primario</item>
+        <item name="android:typeface">monospace</item>
+    </style>
+
+    <style name="boton_flotante">
+        <item name="android:layout_width">70dp</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:layout_marginTop">368dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+
+    </style>
+
 </resources>

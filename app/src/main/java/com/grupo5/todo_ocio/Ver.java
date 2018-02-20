@@ -54,6 +54,14 @@ public class Ver extends Activity{
         img_vFoto = (ImageView) findViewById(R.id.img_vFoto);
         edit = (Button)findViewById(R.id.action_edit); //botón del menú barra
 
+        btn_Borrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {delete(v);}
+        });
+
+
+
+
 
         //Eliminar registros base de datos al pulsar botón borrar
 //        btn_Borrar.setOnClickListener(new View.OnClickListener() {
@@ -105,24 +113,6 @@ public class Ver extends Activity{
        txt_vBio.setText("");
 
    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     //Funcionalidad del botón editar

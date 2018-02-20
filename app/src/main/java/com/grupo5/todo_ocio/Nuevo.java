@@ -48,7 +48,9 @@ public class Nuevo extends Activity {
         id_radioGroup = (RadioGroup)findViewById(R.id.id_radioGroup);
         txtRating = (TextView)findViewById(R.id.rtbText);
 
-        rtnBarFunctionality();
+        btn_Guardar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {insertar(v);}
+        });
 
         //Para acceder a la BD se crea una instancia de la subclase SQLiteOpenHelper
     //    final BBDD_Metodos_helper helper = new BBDD_Metodos_helper(this);
@@ -100,8 +102,8 @@ public class Nuevo extends Activity {
         ContentValues values = new ContentValues();
         values.put(Estructura_BBDD.nombre,txt_nombreLugar.getText().toString());
         values.put(Estructura_BBDD.bio, txt_bio.getText().toString());
-        values.put(Estructura_BBDD.puntuacion, rtnBar.getNumStars());
-        values.put(Estructura_BBDD.tag, id_radioGroup.getCheckedRadioButtonId());
+        //values.put(Estructura_BBDD.puntuacion, rtnBar.getNumStars());
+        //values.put(Estructura_BBDD.tag, id_radioGroup.getCheckedRadioButtonId());
         //values.put(Estructura_BBDD.imagen, img_Foto.get);
         //values.put(Estructura_BBDD.latitud, mpv_Localizacion.get);
 

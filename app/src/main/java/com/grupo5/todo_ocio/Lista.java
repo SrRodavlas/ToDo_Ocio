@@ -17,7 +17,7 @@ public class Lista extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista);
 
-       // getActionBar().setDisplayHomeAsUpEnabled(true);  //hace que pete
+        //getActionBar().setDisplayHomeAsUpEnabled(true);  //hace que pete?
     }
 
     //Funcionalidad del botón buscar
@@ -37,14 +37,6 @@ public class Lista extends AppCompatActivity {
         Intent i = new Intent(this, Ver.class);
         startActivity(i);
     }
-
-
-
-
-
-
-
-
 
 
 

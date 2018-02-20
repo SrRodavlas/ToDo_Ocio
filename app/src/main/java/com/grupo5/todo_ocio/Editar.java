@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.MapView;
@@ -19,7 +20,7 @@ import com.google.android.gms.maps.MapView;
 public class Editar extends Activity {
 
     Button btn_Guardar; //Boton para insertar en BD
-    EditText txt_nombreLugar, txt_bio;
+    TextView txt_nombreLugar, txt_bio;
     ImageView img_Foto;
     MapView mpv_Localizacion;
     RatingBar rtnBar;
@@ -27,30 +28,33 @@ public class Editar extends Activity {
     final BBDD_Metodos_helper helper = new BBDD_Metodos_helper(this);
 
 
-    @SuppressLint("WrongViewCast")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar);
 
-        Nuevo.rtnBarFunctionality();
 
+       // Bundle datosEditar = getIntent().getExtras();
+        //final String nombre = datosEditar.getString("nombre");
+        //String bio = datosEditar.getString("bio");
 
-        Bundle datosEditar = getIntent().getExtras();
-        final String nombre = datosEditar.getString("nombre");
-        String bio = datosEditar.getString("bio");
-
-        txt_nombreLugar.setText(nombre);
-        txt_bio.setText(bio);
+        //txt_nombreLugar.setText(nombre);
+        //txt_bio.setText(bio);
 
 
         btn_Guardar = (Button) findViewById(R.id.btn_eGuardar);
-        txt_nombreLugar = (EditText) findViewById(R.id.txt_eNombreLugar);
+        txt_nombreLugar = (TextView) findViewById(R.id.txt_eNombreLugar);
         txt_bio = (EditText) findViewById(R.id.txt_eBio);
         img_Foto = (ImageView) findViewById(R.id.img_eFoto);
         mpv_Localizacion = (MapView) findViewById(R.id.mpv_eLocalizacion);
         rtnBar = (RatingBar) findViewById(R.id.rtn_eBar);
         id_radioGroup = (RadioGroup) findViewById(R.id.id_eRadioGroup);
+
+        btn_Guardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {update(v);}
+        });
 
        //Actualizar datos BD
 //        btn_Guardar.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +102,7 @@ public class Editar extends Activity {
 
 
         // Which row to update, based on the title
-        //Esto debería hacerse con el id
+        //Esto debería hacerse con el id, en este caso usa el nombre y actualiza ese registro en la BD
         String selection = Estructura_BBDD.nombre + " LIKE ?";
         String[] selectionArgs = { txt_nombreLugar.getText().toString() };
 
