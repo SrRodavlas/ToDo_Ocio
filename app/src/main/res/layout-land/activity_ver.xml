@@ -14,6 +14,7 @@
         android:layout_marginEnd="19dp"
         android:layout_marginTop="14dp"
         android:background="@drawable/delete"
+        android:onClick="delete"
         app:layout_constraintEnd_toStartOf="@+id/mpv_vLocalizacion"
         app:layout_constraintTop_toBottomOf="@+id/btn_editar" />
 

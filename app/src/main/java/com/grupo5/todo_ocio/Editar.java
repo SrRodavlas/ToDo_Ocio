@@ -53,34 +53,66 @@ public class Editar extends Activity {
         id_radioGroup = (RadioGroup) findViewById(R.id.id_eRadioGroup);
 
        //Actualizar datos BD
-        btn_Guardar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                SQLiteDatabase db = helper.getWritableDatabase();
-
-                // New value for one column
-                ContentValues values = new ContentValues();
-                values.put(Estructura_BBDD.nombre, txt_nombreLugar.getText().toString());
-                values.put(Estructura_BBDD.bio, txt_bio.getText().toString());
-                values.put(Estructura_BBDD.puntuacion, rtnBar.getNumStars());
-
-
-                // Which row to update, based on the title
-                //Esto debería hacerse con el id
-                String selection = Estructura_BBDD.nombre + " LIKE ?";
-                String[] selectionArgs = { txt_nombreLugar.getText().toString() };
-
-                int count = db.update(
-                        Estructura_BBDD.TABLE_NAME,
-                        values,
-                        selection,
-                        selectionArgs);
-
-                Toast.makeText(getApplicationContext(), "Datos actualizados",
-                        Toast.LENGTH_SHORT).show();
-
-            }
-        });
+//        btn_Guardar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                SQLiteDatabase db = helper.getWritableDatabase();
+//
+//                // New value for one column
+//                ContentValues values = new ContentValues();
+//                values.put(Estructura_BBDD.nombre, txt_nombreLugar.getText().toString());
+//                values.put(Estructura_BBDD.bio, txt_bio.getText().toString());
+//                values.put(Estructura_BBDD.puntuacion, rtnBar.getNumStars());
+//
+//
+//                // Which row to update, based on the title
+//                //Esto debería hacerse con el id
+//                String selection = Estructura_BBDD.nombre + " LIKE ?";
+//                String[] selectionArgs = { txt_nombreLugar.getText().toString() };
+//
+//                int count = db.update(
+//                        Estructura_BBDD.TABLE_NAME,
+//                        values,
+//                        selection,
+//                        selectionArgs);
+//
+//                Toast.makeText(getApplicationContext(), "Datos actualizados",
+//                        Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
     }
+
+
+    //Actualizar datos BD
+    public void update (View v){
+
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        // New value for one column
+        ContentValues values = new ContentValues();
+        values.put(Estructura_BBDD.nombre, txt_nombreLugar.getText().toString());
+        values.put(Estructura_BBDD.bio, txt_bio.getText().toString());
+        values.put(Estructura_BBDD.puntuacion, rtnBar.getNumStars());
+
+
+        // Which row to update, based on the title
+        //Esto debería hacerse con el id
+        String selection = Estructura_BBDD.nombre + " LIKE ?";
+        String[] selectionArgs = { txt_nombreLugar.getText().toString() };
+
+        int count = db.update(
+                Estructura_BBDD.TABLE_NAME,
+                values,
+                selection,
+                selectionArgs);
+
+        Toast.makeText(getApplicationContext(), "Datos actualizados",
+                Toast.LENGTH_SHORT).show();
+
+
+    }
+
+
 }

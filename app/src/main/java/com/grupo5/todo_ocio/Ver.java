@@ -56,26 +56,26 @@ public class Ver extends Activity{
 
 
         //Eliminar registros base de datos al pulsar botón borrar
-        btn_Borrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //Para poder modificar datos
-                SQLiteDatabase db = helper.getWritableDatabase();
-                // Define 'where' part of query.
-                String selection = Estructura_BBDD.nombre + " LIKE ?";
-                // Specify arguments in placeholder order.
-                String[] selectionArgs = {txt_vNombreLugar.getText().toString()};
-                // Issue SQL statement.
-                db.delete(Estructura_BBDD.TABLE_NAME, selection, selectionArgs);
-
-                Toast.makeText(getApplicationContext(), "Datos eliminados",
-                        Toast.LENGTH_SHORT).show();
-
-                txt_vNombreLugar.setText("");
-                txt_vBio.setText("");
-            }
-        });
+//        btn_Borrar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                //Para poder modificar datos
+//                SQLiteDatabase db = helper.getWritableDatabase();
+//                // Define 'where' part of query.
+//                String selection = Estructura_BBDD.nombre + " LIKE ?";
+//                // Specify arguments in placeholder order.
+//                String[] selectionArgs = {txt_vNombreLugar.getText().toString()};
+//                // Issue SQL statement.
+//                db.delete(Estructura_BBDD.TABLE_NAME, selection, selectionArgs);
+//
+//                Toast.makeText(getApplicationContext(), "Datos eliminados",
+//                        Toast.LENGTH_SHORT).show();
+//
+//                txt_vNombreLugar.setText("");
+//                txt_vBio.setText("");
+//            }
+//        });
 
 //        edit.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -83,6 +83,46 @@ public class Ver extends Activity{
 //            }
 //        });
     }
+
+
+
+    //Eliminar registros base de datos al pulsar botón borrar
+   public void delete (View v){
+
+       //Para poder modificar datos
+       SQLiteDatabase db = helper.getWritableDatabase();
+       // Define 'where' part of query.
+       String selection = Estructura_BBDD.nombre + " LIKE ?";
+       // Specify arguments in placeholder order.
+       String[] selectionArgs = {txt_vNombreLugar.getText().toString()};
+       // Issue SQL statement.
+       db.delete(Estructura_BBDD.TABLE_NAME, selection, selectionArgs);
+
+       Toast.makeText(getApplicationContext(), "Datos eliminados",
+               Toast.LENGTH_SHORT).show();
+
+       txt_vNombreLugar.setText("");
+       txt_vBio.setText("");
+
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     //Funcionalidad del botón editar

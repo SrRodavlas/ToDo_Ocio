@@ -17,7 +17,7 @@ public class Lista extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista);
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+       // getActionBar().setDisplayHomeAsUpEnabled(true);  //hace que pete
     }
 
     //Funcionalidad del botón buscar
@@ -27,7 +27,7 @@ public class Lista extends AppCompatActivity {
     }
 
     //Funcionalidad del botón flotante (nuevo)
-    public void ejeccutar_nuevo(View view){
+    public void ejecutar_nuevo(View view){
         Intent i = new Intent(this, Nuevo.class);
         startActivity(i);
     }

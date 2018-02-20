@@ -58,7 +58,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="368dp"
         android:clickable="true"
-        android:onClick="ejeccutar_nuevo"
+        android:onClick="ejecutar_nuevo"
         app:backgroundTint="@android:color/holo_red_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
