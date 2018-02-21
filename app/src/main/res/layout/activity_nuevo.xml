@@ -150,6 +150,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="17dp"
         android:layout_marginStart="19dp"
+        android:onClick="diaux"
         android:text="Button"
         app:layout_constraintBottom_toTopOf="@+id/img_nFoto"
         app:layout_constraintStart_toEndOf="@+id/mpv_nLocalizacion" />

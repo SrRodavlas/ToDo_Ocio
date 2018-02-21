@@ -22,23 +22,21 @@ public class PhotoDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(R.string.Description)
                 .setPositiveButton(R.string.Camera, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // Tomar foto desde cámara
+                        // SI PULSAS EL BOTON QUE PONE POSITIVO
                     }
                 })
                 .setNegativeButton(R.string.Gallery, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // tomar foto desde galería
+                        // SI PULSAS EL BOTON QUE PONE NEGATIVO
                     }
                 });
-        // Create the AlertDialog object and return it
         return builder.create();
     }
-
+}
 
 
 //    public void obtenerClic(View v) {
@@ -80,4 +78,4 @@ public class PhotoDialogFragment extends DialogFragment {
 //        ImageView iv = (ImageView) findViewById(R.id.imgView);
 //        iv.setImageBitmap(imagen);
 //    }
-}
+

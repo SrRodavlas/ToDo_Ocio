@@ -3,6 +3,7 @@ package com.grupo5.todo_ocio;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -59,11 +60,13 @@ public class Nuevo extends Activity {
         id_radioGroup = (RadioGroup) findViewById(R.id.id_radioGroup);
         txtRating = (TextView) findViewById(R.id.rtbText);
 
-        btn_Guardar.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                insertar(v);
-            }
-        });
+        bb = (Button)findViewById(R.id.botonpruebaborrarahora);
+//
+//        //btn_Guardar.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                insertar(v);
+//            }
+//        });
 
 //        btn_Foto.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -148,9 +151,9 @@ public class Nuevo extends Activity {
     }
 
 
-//    public static void diaux(){
-//        PhotoDialogFragment dialog = new PhotoDialogFragment();
-//        dialog.setMenuVisibility(true);
-//    }
+    public void diaux(View v){
+        DialogFragment dialogfrag = new PhotoDialogFragment();
+        dialogfrag.show(getFragmentManager(),"");
+    }
 }
 
