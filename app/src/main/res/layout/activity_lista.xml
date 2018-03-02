@@ -59,14 +59,4 @@
         app:backgroundTint="@android:color/holo_red_dark"
         style="@style/boton_flotante" />
 
-    <Button
-        android:id="@+id/btn_provisional"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:onClick="ejeccutar_ver"
-        android:text="@string/btn_provisional"
-        app:layout_constraintBottom_toTopOf="@+id/btn_buscar"
-        app:layout_constraintStart_toStartOf="parent" />
-
 </android.support.constraint.ConstraintLayout>

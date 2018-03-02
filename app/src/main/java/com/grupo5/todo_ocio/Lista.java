@@ -64,17 +64,6 @@ public class Lista extends AppCompatActivity {
         startActivity(i);
     }
 
-    //Funcionalidad del botón provisional (esto se haría pulsando en un elemento de la lista
-    public void ejeccutar_ver(View view){
-        Intent i = new Intent(this, Ver.class);
-        startActivity(i);
-    }
-
-
-
-
-
-
     //menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
