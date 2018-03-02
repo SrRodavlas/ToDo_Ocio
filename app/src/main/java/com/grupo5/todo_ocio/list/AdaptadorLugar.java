@@ -7,17 +7,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.grupo5.todo_ocio.R;
 
 import java.util.ArrayList;
 
-public class AdaptadorCategoria extends BaseAdapter {
+public class AdaptadorLugar extends BaseAdapter {
     protected Activity activity;
-    protected ArrayList<Categoria> items;
+    protected ArrayList<Lugar> items;
 
-    public AdaptadorCategoria(Activity activity, ArrayList<Categoria> items) {
+    public AdaptadorLugar(Activity activity, ArrayList<Lugar> items) {
         this.activity = activity;
         this.items = items;
     }
@@ -27,13 +28,13 @@ public class AdaptadorCategoria extends BaseAdapter {
         return items.size();
     }
 
-    public void clear() {
+    public void limpiar() {
         items.clear();
     }
 
-    public void addAll(ArrayList<Categoria> categoria) {
-        for (int i = 0; i < categoria.size(); i++) {
-            items.add(categoria.get(i));
+    public void añadirTodo(ArrayList<Lugar> lugar) {
+        for (int i = 0; i < lugar.size(); i++) {
+            items.add(lugar.get(i));
         }
     }
 
@@ -60,13 +61,13 @@ public class AdaptadorCategoria extends BaseAdapter {
 
         View itemView = inflater.inflate(R.layout.item_categoria, parent, false);
 
-        Categoria dir = items.get(position);
+        Lugar dir = items.get(position);
 
         TextView title = (TextView) itemView.findViewById(R.id.txt_TituloItem);
-        title.setText(dir.getTitle());
+        title.setText(dir.getNombre());
 
-        TextView description = (TextView) itemView.findViewById(R.id.txt_PuntuacionItem);
-        description.setText(dir.getDescripcion());
+        RatingBar puntuacion = (RatingBar) itemView.findViewById(R.id.rtn_puntuacion);
+        puntuacion.setRating(dir.getPuntuacion());
 
         ImageView imagen = (ImageView) itemView.findViewById(R.id.img_ImagenItem);
         imagen.setImageDrawable(dir.getImagen());

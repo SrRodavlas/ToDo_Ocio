@@ -1,0 +1,71 @@
+package com.grupo5.todo_ocio.list;
+
+import android.graphics.drawable.Drawable;
+
+public class Lugar {
+    private int id;
+    private String nombre, descripcion, categoria;
+    private float puntuacion, longitud, latitud;
+    private String imagen;
+
+    public Lugar() {
+        super();
+    }
+
+    public Lugar(int id, String nombre, String descripcion, String categoria, float puntuacion,
+            float longitud, float latitud, String imagen) {
+        super();
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.categoria = categoria;
+        this.puntuacion = puntuacion;
+        this.longitud = longitud;
+        this.latitud = latitud;
+        this.imagen = imagen;
+    }
+
+    public int getId(){return id;}
+
+    public void setId(int id){this.id = id;}
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getCategoria() { return categoria; }
+
+    public void setCategoria(String categoria) { this.categoria = categoria; }
+
+    public float getPuntuacion() { return puntuacion; }
+
+    public void setPuntuacion(float puntuacion) { this.puntuacion = puntuacion; }
+
+    public float getLongitud() { return longitud; }
+
+    public void setLongitud(float longitud) { this.longitud = longitud; }
+
+    public float getLatitud() { return latitud; }
+
+    public void setLatitud(float latitud) { this.latitud = latitud; }
+
+    public String getImagenDireccion() {return imagen; }
+
+    public Drawable getImagen() { return Drawable.createFromPath(imagen); }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+}

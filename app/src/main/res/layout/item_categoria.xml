@@ -3,11 +3,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/lista">
 
-    <TextView
+    <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Texto Frase"
-        android:id="@+id/txt_PuntuacionItem"
+        android:id="@+id/rtn_puntuacion"
+        android:isIndicator="true"
         android:layout_below="@+id/txt_TituloItem"
         android:layout_toRightOf="@+id/img_ImagenItem"
         android:layout_toEndOf="@+id/img_ImagenItem" />
@@ -25,10 +25,10 @@
         android:layout_toEndOf="@+id/img_ImagenItem" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="4dp"
+        android:layout_width="74dp"
+        android:layout_height="64dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="5dp"
         android:layout_marginBottom="2dp"
         android:layout_marginTop="2dp"
         android:id="@+id/img_ImagenItem"
@@ -36,7 +36,7 @@
         android:src="@android:drawable/btn_star"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_alignBottom="@+id/txt_PuntuacionItem"
+        android:layout_alignBottom="@+id/rtn_puntuacion"
         android:maxHeight="35dp"
         android:maxWidth="74dp"
         android:adjustViewBounds="true" />

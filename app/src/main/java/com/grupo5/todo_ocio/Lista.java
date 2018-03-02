@@ -1,6 +1,8 @@
 package com.grupo5.todo_ocio;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -9,33 +11,42 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.grupo5.todo_ocio.list.AdaptadorCategoria;
-import com.grupo5.todo_ocio.list.Categoria;
+import com.grupo5.todo_ocio.list.AdaptadorLugar;
+import com.grupo5.todo_ocio.list.Lugar;
 
 import java.util.ArrayList;
 
 public class Lista extends AppCompatActivity {
 
+    private ArrayList<Lugar> lugares;
+    private Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista);
 
-        ArrayList<Categoria> categoria = new ArrayList<Categoria>();
-        categoria.add(new Categoria("0", "Elemento", "Descripcion", getDrawable(R.drawable.ic_action_save)));
-        categoria.add(new Categoria("1", "Elemento2", "Descripcion2", getDrawable(R.drawable.ic_action_save)));
+        //Carga la lista con la base de datos (prueba temporal hasta implementacion de base de datos)
+        lugares = new ArrayList<Lugar>();
+        lugares.add(new Lugar(0, "Elemento", "Descripcion", "Parque",(float) 5.0, (float) 1.0, (float) 1.0, "drawable/ic_action_save.png"));
+        lugares.add(new Lugar(1, "Elemento2", "Descripcion2", "Parque",(float) 2.5, (float) 1.0, (float) 1.0, "drawable/ic_action_save.png"));
 
         ListView lv = (ListView) findViewById(R.id.lst_categorias);
-        AdaptadorCategoria adapter = new AdaptadorCategoria(this, categoria);
-        lv.setAdapter(adapter);
+        AdaptadorLugar adaptador = new AdaptadorLugar(this, lugares);
+        lv.setAdapter(adaptador);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final int pos = position;
-                //CODIGO AQUI
-
+                Intent i = new Intent(context, Ver.class);
+                i.putExtra("nombre", lugares.get(pos).getNombre());
+                i.putExtra("descripcion", lugares.get(pos).getDescripcion());
+                i.putExtra("puntuacion", lugares.get(pos).getPuntuacion());
+                i.putExtra("longitud", lugares.get(pos).getLongitud());
+                i.putExtra("latitud", lugares.get(pos).getLatitud());
+                i.putExtra("imagen", lugares.get(pos).getImagenDireccion());
+                startActivity(i);
             }
         });
         //getActionBar().setDisplayHomeAsUpEnabled(true);  //hace que pete?
