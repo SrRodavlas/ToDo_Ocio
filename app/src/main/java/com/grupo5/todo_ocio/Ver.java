@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.MapView;
+import com.grupo5.todo_ocio.BD.BBDD_Metodos_helper;
 
 import java.io.File;
 import java.io.FileOutputStream;

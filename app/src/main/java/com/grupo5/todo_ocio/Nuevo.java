@@ -1,37 +1,27 @@
 package com.grupo5.todo_ocio;
 
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.google.android.gms.maps.MapView;
+import com.grupo5.todo_ocio.BD.BBDD_Metodos_helper;
+import com.grupo5.todo_ocio.BD.Estructura_BBDD;
 
-import org.w3c.dom.Text;
-
-import java.io.BufferedInputStream;
-import java.io.FileNotFoundException;
-
-public class Nuevo extends Activity {
+public class Nuevo extends Activity implements PhotoDialogFragment.PhotoDialogListener {
 
     Button btn_Guardar; //Boton para insertar en BD
     TextView txt_nombreLugar, txt_bio;
@@ -42,7 +32,9 @@ public class Nuevo extends Activity {
     RadioGroup id_radioGroup;
     //Para acceder a la BD se crea una instancia de la subclase SQLiteOpenHelper
     final BBDD_Metodos_helper helper = new BBDD_Metodos_helper(this);
-    Button bb;
+    private static int DESDE_CAMARA = 1;
+    private static int DESDE_GALERIA = 2;
+
 
 
     @Override
@@ -60,21 +52,12 @@ public class Nuevo extends Activity {
         id_radioGroup = (RadioGroup) findViewById(R.id.id_radioGroup);
         txtRating = (TextView) findViewById(R.id.rtbText);
 
-        bb = (Button)findViewById(R.id.botonpruebaborrarahora);
 //
 //        //btn_Guardar.setOnClickListener(new View.OnClickListener() {
 //            public void onClick(View v) {
 //                insertar(v);
 //            }
 //        });
-
-//        btn_Foto.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {diaux();}
-//        });
-
-
-
     }
 
     //Para acceder a la BD se crea una instancia de la subclase SQLiteOpenHelper
@@ -98,8 +81,10 @@ public class Nuevo extends Activity {
 //                values.put(Estructura_BBDD.bio, txt_bio.getText().toString());
 //                values.put(Estructura_BBDD.puntuacion, rtnBar.getNumStars());
 //                values.put(Estructura_BBDD.tag, id_radioGroup.getCheckedRadioButtonId());
-    //values.put(Estructura_BBDD.imagen, img_Foto.get);
-    //values.put(Estructura_BBDD.latitud, mpv_Localizacion.get);
+                //values.put(Estructura_BBDD.imagen, img_Foto.get);
+                //values.put(Estructura_BBDD.latitud, mpv_Localizacion.get);
+                 //values.put(Estructura_BBDD.longitud, mpv_Localizacion.get);
+
 
     // Insert the new row, returning the primary key value of the new row
     //Aquí se guarda el valor del id de la nueva fila creada
@@ -130,6 +115,7 @@ public class Nuevo extends Activity {
         //values.put(Estructura_BBDD.tag, id_radioGroup.getCheckedRadioButtonId());
         //values.put(Estructura_BBDD.imagen, img_Foto.get);
         //values.put(Estructura_BBDD.latitud, mpv_Localizacion.get);
+        //values.put(Estructura_BBDD.longitud, mpv_Localizacion.get);
 
         // Insert the new row, returning the primary key value of the new row
         //Aquí se guarda el valor del id de la nueva fila creada
@@ -154,6 +140,18 @@ public class Nuevo extends Activity {
     public void diaux(View v){
         DialogFragment dialogfrag = new PhotoDialogFragment();
         dialogfrag.show(getFragmentManager(),"");
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+
+        Intent intent = null;
+        intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
     }
 }
 

@@ -1,4 +1,4 @@
-package com.grupo5.todo_ocio;
+package com.grupo5.todo_ocio.BD;
 
 
 public class Estructura_BBDD {

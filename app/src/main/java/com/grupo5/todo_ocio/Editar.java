@@ -1,7 +1,6 @@
 package com.grupo5.todo_ocio;
 
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.MapView;
+import com.grupo5.todo_ocio.BD.BBDD_Metodos_helper;
+import com.grupo5.todo_ocio.BD.Estructura_BBDD;
 
 public class Editar extends Activity {
 

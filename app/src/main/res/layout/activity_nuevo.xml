@@ -61,7 +61,9 @@
         android:layout_marginEnd="22dp"
         android:layout_marginStart="6dp"
         android:layout_marginTop="15dp"
+        android:clickable="true"
         android:editable="true"
+        android:enabled="true"
         android:text="@string/lbl_NombreLugar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/lbl_nLugar"
@@ -82,12 +84,14 @@
         android:layout_height="133dp"
         android:layout_marginBottom="38dp"
         android:layout_marginEnd="16dp"
-        android:background="@color/colorEspecial"
+        android:adjustViewBounds="true"
         android:clickable="true"
+        android:onClick="diaux"
+        android:src="@drawable/selector"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_action_camera" />
+        app:srcCompat="@drawable/selector" />
 
     <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/id_radioGroup"
@@ -143,16 +147,5 @@
         android:layout_marginEnd="73dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/botonpruebaborrarahora"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="17dp"
-        android:layout_marginStart="19dp"
-        android:onClick="diaux"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/img_nFoto"
-        app:layout_constraintStart_toEndOf="@+id/mpv_nLocalizacion" />
 
 </android.support.constraint.ConstraintLayout>

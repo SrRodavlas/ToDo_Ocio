@@ -1,6 +1,7 @@
 package com.grupo5.todo_ocio;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -11,12 +12,14 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RadioButton;
+
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
+
 
 public class PhotoDialogFragment extends DialogFragment {
 
@@ -26,56 +29,176 @@ public class PhotoDialogFragment extends DialogFragment {
         builder.setMessage(R.string.Description)
                 .setPositiveButton(R.string.Camera, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // SI PULSAS EL BOTON QUE PONE POSITIVO
+
                     }
                 })
                 .setNegativeButton(R.string.Gallery, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // SI PULSAS EL BOTON QUE PONE NEGATIVO
+
                     }
                 });
         return builder.create();
     }
+
+    public interface PhotoDialogListener {
+        public void onDialogPositiveClick(DialogFragment dialog);
+        public void onDialogNegativeClick(DialogFragment dialog);
+    }
+
+    // Use this instance of the interface to deliver action events
+    PhotoDialogListener mListener;
+
+    // Override the Fragment.onAttach() method to instantiate the NoticeDialogListener
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        // Verify that the host activity implements the callback interface
+        try {
+            // Instantiate the NoticeDialogListener so we can send events to the host
+            mListener = (PhotoDialogListener) activity;
+        } catch (ClassCastException e) {
+            // The activity doesn't implement the interface, throw exception
+            throw new ClassCastException(activity.toString()
+                    + " must implement PhotoDialogListener");
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     /*@Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == DESDE_CAMARA) {
+
+            if (data != null) {
+
+                if (data.hasExtra("data")) {
+                    ib = (ImageButton) getActivity().findViewById(R.id.img_nFoto);
+                    ib.setImageBitmap((Bitmap) data.getParcelableExtra("data"));
+                }
+
+            } else {
+
+                ib = (ImageButton) getActivity().findViewById(R.id.img_nFoto);
+                ib.setImageBitmap(BitmapFactory.decodeFile(name));
+
+                new MediaScannerConnection.MediaScannerConnectionClient() {
+                    private MediaScannerConnection msc = null;
+
+                    {
+                        msc = new MediaScannerConnection(getActivity().getApplicationContext(), this);
+                        msc.connect();
+                    }
+
+                    public void onMediaScannerConnected() {
+                        msc.scanFile(name, null);
+                    }
+
+                    public void onScanCompleted(String path, Uri uri) {
+                        msc.disconnect();
+                    }
+                };
+            }
+
+        } else if (requestCode == DESDE_GALERIA) {
+            Uri selectedImage = data.getData();
+            InputStream is;
+            try {
+                is = getActivity().getContentResolver().openInputStream(selectedImage);
+                BufferedInputStream bis = new BufferedInputStream(is);
+                Bitmap bitmap = BitmapFactory.decodeStream(bis);
+                ib = (ImageButton) getActivity().findViewById(R.id.img_nFoto);
+                ib.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }*/
 }
 
 
-//    public void obtenerClic(View v) {
-//        RadioButton radbtnCamara = (RadioButton) findViewById(R.id.radbtnCamara);
-//        RadioButton radbtnGaleria = (RadioButton) findViewById(R.id.radbtnGaleria);
-//
-//        Intent intent = null;
-//        int code = 0;
-//        if (radbtnCamara.isChecked()) {
-//            intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//            code = DESDE_CAMARA;
-//        }
-//        if (radbtnGaleria.isChecked()) {
-//            intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-//            code = DESDE_GALERIA;
-//        }
-//
-//        startActivityForResult(intent, code);
-//    }
 
-    // Función que se ejecuta cuando concluye el intent en el que se solicita la imagen
-    // ya sea desde la cámara como desde la galería
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//CODIGO SIN MODIFICAR, ASI FUNCIONA
+//public class PhotoDialogFragment extends DialogFragment {
+//
 //    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//    public Dialog onCreateDialog(Bundle savedInstanceState) {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//        builder.setMessage(R.string.Description)
+//                .setPositiveButton(R.string.Camera, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
 //
-//        Bitmap imagen = null;
+//                    }
+//                })
+//                .setNegativeButton(R.string.Gallery, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
 //
-//        if (requestCode == DESDE_CAMARA) {
-//            imagen = (Bitmap) data.getParcelableExtra("data");
-//        }
-//
-//        if (requestCode == DESDE_GALERIA) {
-//            Uri rutaImagen = data.getData();
-//            try {
-//                imagen = BitmapFactory.decodeStream(new BufferedInputStream(getContentResolver().openInputStream(rutaImagen)));
-//            } catch (FileNotFoundException e) { }
-//        }
-//
-//        ImageView iv = (ImageView) findViewById(R.id.imgView);
-//        iv.setImageBitmap(imagen);
+//                    }
+//                });
+//        return builder.create();
 //    }
+//}
 
