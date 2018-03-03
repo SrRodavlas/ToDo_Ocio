@@ -25,9 +25,9 @@
         android:layout_toEndOf="@+id/img_ImagenItem" />
 
     <ImageView
-        android:layout_width="74dp"
+        android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_marginLeft="0dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="2dp"
         android:layout_marginTop="2dp"

@@ -18,6 +18,11 @@
     <string name="rtnBar"></string>
     <string name="img_Foto"></string>
     <string name="btn_guardar">Guardar</string>
+    <string name="diag_tituloBorrado">¡Borrar registro!</string>
+    <string name="diag_mensajeBorrado">Estás a punto de borrar el registro. ¿Deseas continuar?</string>
+    <string name="btn_confirmar">Si</string>
+    <string name="btn_cancelar">No</string>
+    <string name="t_registroBorrado">El registro ha sido eliminado.</string>
 
     <!--activity_nuevo-->
 

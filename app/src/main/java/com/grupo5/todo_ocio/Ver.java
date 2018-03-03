@@ -4,9 +4,13 @@ package com.grupo5.todo_ocio;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -29,12 +33,13 @@ import java.io.OutputStream;
 
 public class Ver extends Activity{
 
-    Button btn_Borrar;  //boton para borrar en BD
-    TextView txt_vNombreLugar, txt_vBio;
-    ImageView img_vFoto;
-    MapView mpv_vLocalizacion;
-    RatingBar rtn_vBar;
-    Button edit;
+    private Button btn_Borrar, btn_Editar;  //boton para borrar en BD
+    private TextView txt_vNombreLugar, txt_vBio;
+    private ImageView img_vFoto;
+    private MapView mpv_vLocalizacion;
+    private RatingBar rtn_vBar;
+    private int posicion;
+    private Context context = this;
 
     //Para acceder a la BD se crea una instancia de la subclase SQLiteOpenHelper
     final BBDD_Metodos_helper helper = new BBDD_Metodos_helper(this);
@@ -52,12 +57,30 @@ public class Ver extends Activity{
         rtn_vBar = (RatingBar) findViewById(R.id.rtn_vBar);
         mpv_vLocalizacion = (MapView) findViewById(R.id.mpv_vLocalizacion);
         img_vFoto = (ImageView) findViewById(R.id.img_vFoto);
-        edit = (Button)findViewById(R.id.action_edit); //botón del menú barra
+        btn_Editar = (Button)findViewById(R.id.action_edit); //botón del menú barra
+        posicion = getIntent().getExtras().getInt("posicion");
 
-        btn_Borrar.setOnClickListener(new View.OnClickListener() {
+        txt_vNombreLugar.setText(txt_vNombreLugar.getText() + " "
+                + Lista.lugares.get(posicion).getNombre());
+        txt_vBio.setText(Lista.lugares.get(posicion).getDescripcion());
+        rtn_vBar.setRating(Lista.lugares.get(posicion).getPuntuacion());
+        File fichero = new File(Environment.getExternalStorageDirectory()
+                + "/imagenes/" + Lista.lugares.get(posicion).getImagen());
+        if(fichero.exists()) {
+            Bitmap bMap = BitmapFactory.decodeFile(fichero.getPath());
+            img_vFoto.setImageBitmap(bMap);
+        }
+        else {
+            img_vFoto.setImageDrawable(getDrawable(R.drawable.no_disponible));
+        }
+
+
+
+
+        /*btn_Borrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {delete(v);}
-        });
+        });*/
 
 
 
@@ -96,28 +119,42 @@ public class Ver extends Activity{
 
     //Eliminar registros base de datos al pulsar botón borrar
    public void delete (View v){
+       AlertDialog.Builder builder = new AlertDialog.Builder(this);
+       builder.setTitle(R.string.diag_tituloBorrado);
+       builder.setMessage(R.string.diag_mensajeBorrado);
+       builder.setCancelable(false);
+       builder.setPositiveButton(R.string.btn_confirmar, new DialogInterface.OnClickListener() {
+           @Override
+           public void onClick(DialogInterface dialog, int which) {
+               //TODO Instruciones para borrar en la base de datos el registro
+               /*//Para poder modificar datos
+               SQLiteDatabase db = helper.getWritableDatabase();
+               // Define 'where' part of query.
+               String selection = Estructura_BBDD.nombre + " LIKE ?";
+               // Specify arguments in placeholder order.
+               String[] selectionArgs = {txt_vNombreLugar.getText().toString()};
+               // Issue SQL statement.
+               db.delete(Estructura_BBDD.TABLE_NAME, selection, selectionArgs);*/
+               Lista.lugares.remove(posicion);
+               Toast.makeText(getApplicationContext(), R.string.t_registroBorrado,
+                       Toast.LENGTH_SHORT).show();
+               Intent i = new Intent(context, Lista.class);
+               startActivity(i);
+           }
+       });
 
-       //Para poder modificar datos
-       SQLiteDatabase db = helper.getWritableDatabase();
-       // Define 'where' part of query.
-       String selection = Estructura_BBDD.nombre + " LIKE ?";
-       // Specify arguments in placeholder order.
-       String[] selectionArgs = {txt_vNombreLugar.getText().toString()};
-       // Issue SQL statement.
-       db.delete(Estructura_BBDD.TABLE_NAME, selection, selectionArgs);
-
-       Toast.makeText(getApplicationContext(), "Datos eliminados",
-               Toast.LENGTH_SHORT).show();
-
-       txt_vNombreLugar.setText("");
-       txt_vBio.setText("");
-
+       builder.setNegativeButton(R.string.btn_cancelar, new DialogInterface.OnClickListener() {
+           @Override
+           public void onClick(DialogInterface dialog, int which) {
+               //No ocurre nada
+           }
+       });
+       builder.show();
    }
 
 
     //Funcionalidad del botón editar
-
-    public void ejectuar_editar(View view){
+    public void editar(View view){
 
         Intent i = new Intent(this, Editar.class);
 
@@ -148,7 +185,7 @@ public class Ver extends Activity{
 //            Log.e("ERROR!", e.getMessage());
 //        }
         //---------------------------------------------------------------------------------------------
-
+        i.putExtra("posicion", posicion);
         startActivity(i);
     }
 

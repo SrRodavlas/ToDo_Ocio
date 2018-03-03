@@ -14,6 +14,7 @@
         android:layout_marginEnd="15dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/delete"
+        android:onClick="delete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,7 +25,7 @@
         android:layout_marginStart="269dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/edit"
-        android:onClick="ejectuar_editar"
+        android:onClick="editar"
         app:layout_constraintEnd_toStartOf="@+id/btn_nGuardar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -69,6 +70,7 @@
         android:layout_height="44dp"
         android:layout_marginBottom="23dp"
         android:layout_marginEnd="72dp"
+        android:isIndicator="true"
         android:onClick="delete"
         app:layout_constraintBottom_toTopOf="@+id/mpv_vLocalizacion"
         app:layout_constraintEnd_toEndOf="parent" />
