@@ -50,13 +50,13 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_nuevo"
-        android:onClick="ejecutar_nuevo"
+        style="@style/boton_flotante"
 
+        android:onClick="nuevo"
+        app:backgroundTint="@android:color/holo_red_dark"
         app:layout_constraintBottom_toTopOf="@+id/btn_buscar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add"
-        app:backgroundTint="@android:color/holo_red_dark"
-        style="@style/boton_flotante" />
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 </android.support.constraint.ConstraintLayout>

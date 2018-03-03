@@ -77,8 +77,7 @@ public class AdaptadorLugar extends BaseAdapter {
         puntuacion.setRating(dir.getPuntuacion());
 
         ImageView imagen = (ImageView) itemView.findViewById(R.id.img_ImagenItem);
-        File fichero = new File(Environment.getExternalStorageDirectory()
-                + "/imagenes/" + dir.getImagen());
+        File fichero = new File(dir.getImagen());
         if(fichero.exists()) {
             Bitmap bMap = BitmapFactory.decodeFile(fichero.getPath());
             imagen.setImageBitmap(bMap);

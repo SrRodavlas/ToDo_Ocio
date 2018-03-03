@@ -30,7 +30,7 @@ public class Lista extends AppCompatActivity {
         lugares = new ArrayList<Lugar>();
         //TODO Sacar de la base de datos los registros para la lista
         lugares.add(new Lugar(0, "Elemento", "Descripcion", "Parque",(float) 5.0, 1.0, 1.0, "drawable/ic_action_save.png"));
-        lugares.add(new Lugar(1, "Elemento2", "Descripcion2", "Parque",(float) 2.5,1.0, 1.0, "drawable/ic_action_save.png"));
+        lugares.add(new Lugar(1, "Elemento2", "Descripcion2", "Cine",(float) 2.5,1.0, 1.0, "drawable/ic_action_save.png"));
 
         ListView lv = (ListView) findViewById(R.id.lst_categorias);
         AdaptadorLugar adaptador = new AdaptadorLugar(this, lugares);
@@ -41,12 +41,6 @@ public class Lista extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final int pos = position;
                 Intent i = new Intent(context, Ver.class);
-                /*i.putExtra("nombre", lugares.get(pos).getNombre());
-                i.putExtra("descripcion", lugares.get(pos).getDescripcion());
-                i.putExtra("puntuacion", lugares.get(pos).getPuntuacion());
-                i.putExtra("longitud", lugares.get(pos).getLongitud());
-                i.putExtra("latitud", lugares.get(pos).getLatitud());
-                i.putExtra("imagen", lugares.get(pos).getImagenDireccion());*/
                 i.putExtra("posicion", pos);
                 startActivity(i);
             }
@@ -61,8 +55,8 @@ public class Lista extends AppCompatActivity {
     }
 
     //Funcionalidad del botón flotante (nuevo)
-    public void ejecutar_nuevo(View view){
-        Intent i = new Intent(this, Nuevo.class);
+    public void nuevo(View view){
+        Intent i = new Intent(this, Editar.class);
         startActivity(i);
     }
 

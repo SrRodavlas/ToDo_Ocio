@@ -53,6 +53,10 @@
     <string name="btn_editar">Editar</string>
     <string name="rdb_eCine">Cine</string>
     <string name="rdb_eParque">Parque</string>
+    <string name="t_registroNuevo">El lugar ha sido guardado.</string>
+    <string name="t_registroGuerdado">El lugar ha sido actualizado.</string>
+    <string name="t_imagenNoEscogida">No has escogido ninguna imagen.</string>
+
 
     <!--Dialog-->
 

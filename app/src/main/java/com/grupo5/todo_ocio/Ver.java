@@ -65,8 +65,7 @@ public class Ver extends Activity{
                 + Lista.lugares.get(posicion).getNombre());
         txt_vBio.setText(Lista.lugares.get(posicion).getDescripcion());
         rtn_vBar.setRating(Lista.lugares.get(posicion).getPuntuacion());
-        File fichero = new File(Environment.getExternalStorageDirectory()
-                + "/imagenes/" + Lista.lugares.get(posicion).getImagen());
+        File fichero = new File(Lista.lugares.get(posicion).getImagen());
         if(fichero.exists()) {
             Bitmap bMap = BitmapFactory.decodeFile(fichero.getPath());
             img_vFoto.setImageBitmap(bMap);
@@ -119,12 +118,12 @@ public class Ver extends Activity{
 
 
     //Eliminar registros base de datos al pulsar botón borrar
-   public void delete (View v){
-       AlertDialog.Builder builder = new AlertDialog.Builder(this);
-       builder.setTitle(R.string.diag_tituloBorrado);
-       builder.setMessage(R.string.diag_mensajeBorrado);
-       builder.setCancelable(false);
-       builder.setPositiveButton(R.string.btn_confirmar, new DialogInterface.OnClickListener() {
+   public void borrar (View v){
+       AlertDialog.Builder borrarLugar = new AlertDialog.Builder(this);
+       borrarLugar.setTitle(R.string.diag_tituloBorrado);
+       borrarLugar.setMessage(R.string.diag_mensajeBorrado);
+       borrarLugar.setCancelable(false);
+       borrarLugar.setPositiveButton(R.string.btn_confirmar, new DialogInterface.OnClickListener() {
            @Override
            public void onClick(DialogInterface dialog, int which) {
                //TODO Instruciones para borrar en la base de datos el registro
@@ -136,7 +135,7 @@ public class Ver extends Activity{
                String[] selectionArgs = {txt_vNombreLugar.getText().toString()};
                // Issue SQL statement.
                db.delete(Estructura_BBDD.TABLE_NAME, selection, selectionArgs);*/
-               Lista.lugares.remove(posicion);
+               //Lista.lugares.remove(posicion);
                Toast.makeText(getApplicationContext(), R.string.t_registroBorrado,
                        Toast.LENGTH_SHORT).show();
                Intent i = new Intent(context, Lista.class);
@@ -144,13 +143,13 @@ public class Ver extends Activity{
            }
        });
 
-       builder.setNegativeButton(R.string.btn_cancelar, new DialogInterface.OnClickListener() {
+       borrarLugar.setNegativeButton(R.string.btn_cancelar, new DialogInterface.OnClickListener() {
            @Override
            public void onClick(DialogInterface dialog, int which) {
                //No ocurre nada
            }
        });
-       builder.show();
+       borrarLugar.show();
    }
 
 
