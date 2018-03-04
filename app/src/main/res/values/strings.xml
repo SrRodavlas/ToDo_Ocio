@@ -73,6 +73,7 @@
     <string name="action_edit">action_edit</string>
     <string name="action_delete">action_delete</string>
 
-
+    <!--MANIFEST-->
+    <string name="google_maps_key">AIzaSyA0rDk_pY8d4eRC52hsBhs4VdX667nYIEk</string>
 
 </resources>

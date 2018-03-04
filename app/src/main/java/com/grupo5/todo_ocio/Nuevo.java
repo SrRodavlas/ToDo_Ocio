@@ -6,12 +6,16 @@ import android.app.DialogFragment;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -20,6 +24,9 @@ import android.widget.Toast;
 import com.google.android.gms.maps.MapView;
 import com.grupo5.todo_ocio.BD.BBDD_Metodos_helper;
 import com.grupo5.todo_ocio.BD.Estructura_BBDD;
+
+import java.io.BufferedInputStream;
+import java.io.FileNotFoundException;
 
 public class Nuevo extends Activity implements PhotoDialogFragment.PhotoDialogListener {
 
@@ -30,6 +37,7 @@ public class Nuevo extends Activity implements PhotoDialogFragment.PhotoDialogLi
     static RatingBar rtnBar;
     static TextView txtRating;
     RadioGroup id_radioGroup;
+    ImageButton ib;
     //Para acceder a la BD se crea una instancia de la subclase SQLiteOpenHelper
     final BBDD_Metodos_helper helper = new BBDD_Metodos_helper(this);
     private static int DESDE_CAMARA = 1;
@@ -51,6 +59,9 @@ public class Nuevo extends Activity implements PhotoDialogFragment.PhotoDialogLi
         rtnBar = (RatingBar) findViewById(R.id.rtnBar);
         id_radioGroup = (RadioGroup) findViewById(R.id.id_radioGroup);
         txtRating = (TextView) findViewById(R.id.rtbText);
+        ib = (ImageButton) findViewById(R.id.img_nFoto);
+
+
 
 //
 //        //btn_Guardar.setOnClickListener(new View.OnClickListener() {
@@ -147,11 +158,34 @@ public class Nuevo extends Activity implements PhotoDialogFragment.PhotoDialogLi
 
         Intent intent = null;
         intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
     }
 
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        Bitmap imagen = null;
+
+        if (requestCode == DESDE_CAMARA) {
+            imagen = (Bitmap) data.getParcelableExtra("data");
+        }
+
+        if (requestCode == DESDE_GALERIA) {
+            Uri rutaImagen = data.getData();
+            try {
+                imagen = BitmapFactory.decodeStream(new BufferedInputStream(getContentResolver().openInputStream(rutaImagen)));
+            } catch (FileNotFoundException e) { }
+        }
+
+        ib.setImageBitmap(imagen);
+    }
+
+
+
 }
 

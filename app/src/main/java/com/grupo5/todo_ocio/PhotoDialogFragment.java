@@ -30,11 +30,13 @@ public class PhotoDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.Camera, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
+                        mListener.onDialogPositiveClick(PhotoDialogFragment.this);
                     }
                 })
                 .setNegativeButton(R.string.Gallery, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
+                        mListener.onDialogNegativeClick(PhotoDialogFragment.this);
                     }
                 });
         return builder.create();

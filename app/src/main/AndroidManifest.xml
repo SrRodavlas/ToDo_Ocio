@@ -20,6 +20,10 @@
         android:roundIcon="@mipmap/new_icon_launcher"
         android:supportsRtl="true"
         android:theme="@style/WhateverTheme">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key"/>
+
         <activity android:name=".Lista"
             android:theme="@style/WhateverTheme">
             <intent-filter>
