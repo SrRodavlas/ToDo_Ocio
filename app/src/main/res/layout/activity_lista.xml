@@ -10,7 +10,7 @@
     <Button
         android:id="@+id/btn_buscar"
         style="@style/fabulousStyle"
-        android:onClick="ejeccutar_mapa"
+        android:onClick="mapa"
         android:text="@string/btn_buscar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

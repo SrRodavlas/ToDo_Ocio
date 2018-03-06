@@ -34,9 +34,9 @@ public class Lista extends AppCompatActivity {
         //Carga la lista con la base de datos (prueba temporal hasta implementacion de base de datos)
         lugares = new ArrayList<Lugar>();
         //TODO Sacar de la base de datos los registros para la lista
-        lugares.add(new Lugar(0, "Elemento", "Descripcion", "Parque",(float) 5.0, 1.0, 1.0, "drawable/ic_action_save.png"));
-        lugares.add(new Lugar(1, "Elemento2", "Descripcion2", "Cine",(float) 2.5,1.0, 1.0, "drawable/ic_action_save.png"));
-        lugares.add(new Lugar(1, "Elemento3", "Descripcion3", "Restaurante",(float) 3.5,1.0, 1.0, "drawable/ic_action_save.png"));
+        lugares.add(new Lugar(0, "Elemento", "Descripcion", "Parque",(float) 5.0, 37.405456,  -5.970134, "drawable/ic_action_save.png"));
+        lugares.add(new Lugar(1, "Elemento2", "Descripcion2", "Cine",(float) 2.5,37.394442, -5.983640, "drawable/ic_action_save.png"));
+        lugares.add(new Lugar(1, "Elemento3", "Descripcion3", "Restaurante",(float) 3.5,37.392736, -5.996429, "drawable/ic_action_save.png"));
 
         ListView lv = findViewById(R.id.lst_categorias);
         adaptador = new AdaptadorLugar(activity, new ArrayList<Lugar>());
@@ -101,8 +101,9 @@ public class Lista extends AppCompatActivity {
     }
 
     //Funcionalidad del botón buscar
-    public void ejeccutar_mapa(View view){
+    public void mapa(View view){
       Intent i = new Intent(this, Mapa.class);
+      i.putExtra("categoria", (String) spin_filtrado.getSelectedItem());
       startActivity(i);
     }
 

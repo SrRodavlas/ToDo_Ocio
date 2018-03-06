@@ -2,19 +2,14 @@ package com.grupo5.todo_ocio;
 
 
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -29,8 +24,6 @@ import com.google.android.gms.maps.MapView;
 import com.grupo5.todo_ocio.BD.BBDD_Metodos_helper;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 
 public class Ver extends Activity{
 
@@ -40,7 +33,7 @@ public class Ver extends Activity{
     private MapView mpv_vLocalizacion;
     private RatingBar rtn_vBar;
     private int posicion;
-    private Context context = this;
+    private Activity activity = this;
 
     //Para acceder a la BD se crea una instancia de la subclase SQLiteOpenHelper
     final BBDD_Metodos_helper helper = new BBDD_Metodos_helper(this);
@@ -138,7 +131,7 @@ public class Ver extends Activity{
                //Lista.lugares.remove(posicion);
                Toast.makeText(getApplicationContext(), R.string.t_registroBorrado,
                        Toast.LENGTH_SHORT).show();
-               Intent i = new Intent(context, Lista.class);
+               Intent i = new Intent(activity, Lista.class);
                startActivity(i);
            }
        });
