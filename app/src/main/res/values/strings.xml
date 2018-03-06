@@ -7,6 +7,10 @@
     <string name="btn_ver">Ver</string>
     <string name="btn_buscar">Buscar</string>
     <string name="vsb_scroll"></string>
+    <string name="spin_filtradoTodo">Todos</string>
+    <string name="spin_filtradoCine">Cines</string>
+    <string name="spin_filtradoParque">Parques</string>
+    <string name="spin_filtradoRestaurante">Restaurantes</string>
     <string name="btn_provisional">BtnProv</string> <!--este boton hace lo que haría seleccionar un elemento en la lista. provisional-->
 
     <!--activity_ver-->
