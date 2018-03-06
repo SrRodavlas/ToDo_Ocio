@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -20,17 +21,23 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.grupo5.todo_ocio.BD.BBDD_Metodos_helper;
 
 import java.io.File;
 
-public class Ver extends Activity{
+public class Ver extends AppCompatActivity implements OnMapReadyCallback {
 
     private Button btn_Borrar, btn_Editar;  //boton para borrar en BD
     private TextView txt_vNombreLugar, txt_vBio;
     private ImageView img_vFoto;
-    private MapView mpv_vLocalizacion;
     private RatingBar rtn_vBar;
     private int posicion;
     private Activity activity = this;
@@ -49,7 +56,6 @@ public class Ver extends Activity{
         txt_vNombreLugar = (TextView) findViewById(R.id.lbl_vNombre);
         txt_vBio = (EditText) findViewById(R.id.lbl_vBio);
         rtn_vBar = (RatingBar) findViewById(R.id.rtn_vBar);
-        mpv_vLocalizacion = (MapView) findViewById(R.id.mpv_vLocalizacion);
         img_vFoto = (ImageView) findViewById(R.id.img_vFoto);
         btn_Editar = (Button)findViewById(R.id.action_edit); //botón del menú barra
         posicion = getIntent().getExtras().getInt("posicion");
@@ -58,6 +64,11 @@ public class Ver extends Activity{
                 + Lista.lugares.get(posicion).getNombre());
         txt_vBio.setText(Lista.lugares.get(posicion).getDescripcion());
         rtn_vBar.setRating(Lista.lugares.get(posicion).getPuntuacion());
+
+        SupportMapFragment mpv_vLocalizacion = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.mpv_vLocalizacion);
+        mpv_vLocalizacion.getMapAsync(this);
+
         File fichero = new File(Lista.lugares.get(posicion).getImagen());
         if(fichero.exists()) {
             Bitmap bMap = BitmapFactory.decodeFile(fichero.getPath());
@@ -108,7 +119,24 @@ public class Ver extends Activity{
 //        });
     }
 
-
+    public void onMapReady(GoogleMap googleMap) {
+        if(Lista.lugares.get(posicion).getCategoria().equals("Cine")){
+            googleMap.addMarker(new MarkerOptions().position(new LatLng(Lista.lugares.get(posicion).getLongitud(), Lista.lugares.get(posicion).getLatitud()))
+                    .title(Lista.lugares.get(posicion).getNombre())
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+        }
+        if(Lista.lugares.get(posicion).getCategoria().equals("Parque")){
+            googleMap.addMarker(new MarkerOptions().position(new LatLng(Lista.lugares.get(posicion).getLongitud(), Lista.lugares.get(posicion).getLatitud()))
+                    .title(Lista.lugares.get(posicion).getNombre())
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+        }
+        if(Lista.lugares.get(posicion).getCategoria().equals("Restaurante")){
+            googleMap.addMarker(new MarkerOptions().position(new LatLng(Lista.lugares.get(posicion).getLongitud(), Lista.lugares.get(posicion).getLatitud()))
+                    .title(Lista.lugares.get(posicion).getNombre())
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+        }
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(Lista.lugares.get(posicion).getLongitud(), Lista.lugares.get(posicion).getLatitud())));
+    }
 
     //Eliminar registros base de datos al pulsar botón borrar
    public void borrar (View v){
