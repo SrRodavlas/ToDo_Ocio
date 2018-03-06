@@ -41,4 +41,42 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <style name="SaveButtonStyle">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_marginEnd">15dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:background">@drawable/save</item>
+    </style>
+
+    <style name="CameraButton">
+        <item name="android:layout_width">64dp</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:layout_marginEnd">12dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:background">@drawable/camara</item>
+    </style>
+
+    <style name="GalleryButton">
+        <item name="android:layout_width">64dp</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:layout_marginEnd">28dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:background">@drawable/galeria</item>
+    </style>
+
+    <style name="CameraButtonLand">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_marginTop">92dp</item>
+        <item name="android:background">@drawable/camara</item>
+    </style>
+
+    <style name="GalleryButtonLand">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_marginTop">27dp</item>
+        <item name="android:background">@drawable/galeria</item>
+    </style>
+
 </resources>
