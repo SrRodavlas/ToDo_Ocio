@@ -2,14 +2,15 @@ package com.grupo5.todo_ocio;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.grupo5.todo_ocio.list.AdaptadorLugar;
 import com.grupo5.todo_ocio.list.Lugar;
@@ -45,6 +46,11 @@ public class Lista extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        Spinner spinner = (Spinner) findViewById(R.id.spin_filtrado);
+        String[] letra = {"Cines", "Parques", "Restaurantes", "Todos"};
+        spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, letra));
+
         //getActionBar().setDisplayHomeAsUpEnabled(true);  //hace que pete?
     }
 
