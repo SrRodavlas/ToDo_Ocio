@@ -15,7 +15,12 @@ public class BBDD_Metodos_helper extends SQLiteOpenHelper{
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(Estructura_BBDD.SQL_CREATE_ENTRIES);
+        //db.execSQL("CREATE TABLE " + );
+
+
+
+
+
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

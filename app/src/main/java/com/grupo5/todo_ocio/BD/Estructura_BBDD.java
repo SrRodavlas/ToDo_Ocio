@@ -9,6 +9,9 @@ public class Estructura_BBDD {
 
         /* Inner class that defines the table contents */
         //public static class FeedEntry implements BaseColumns {
+
+
+
             public static final String TABLE_NAME = "Lugares";
             public static final String id = "id";
             public static final String nombre = "Nombre";
