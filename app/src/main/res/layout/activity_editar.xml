@@ -9,14 +9,10 @@
 
     <Button
         android:id="@+id/btn_eGuardar"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/save"
         android:onClick="actualizar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/SaveButtonStyle" />
 
     <EditText
         android:id="@+id/txt_eBio"
@@ -135,25 +131,17 @@
 
     <Button
         android:id="@+id/btn_eCamara"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/camara"
         android:onClick="tomarFoto"
         app:layout_constraintEnd_toStartOf="@+id/btn_eGaleria"
-        app:layout_constraintTop_toBottomOf="@+id/rtn_eBar" />
+        app:layout_constraintTop_toBottomOf="@+id/rtn_eBar"
+        style="@style/CameraButton" />
 
     <Button
         android:id="@+id/btn_eGaleria"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/galeria"
         android:onClick="galeria"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rtn_eBar" />
+        app:layout_constraintTop_toBottomOf="@+id/rtn_eBar"
+        style="@style/GalleryButton" />
 
     <Button
         android:id="@+id/btn_eLocalizacion"

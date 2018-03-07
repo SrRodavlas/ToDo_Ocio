@@ -8,11 +8,9 @@
 
     <Button
         android:id="@+id/btn_nGuardar"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
         android:layout_marginBottom="60dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/save"
+        style="@style/SaveButtonStyle"
         android:onClick="insertar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/img_nFoto" />

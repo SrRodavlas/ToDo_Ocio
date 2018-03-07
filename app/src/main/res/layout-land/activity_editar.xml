@@ -9,30 +9,22 @@
 
     <Button
         android:id="@+id/btn_eCamara"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="92dp"
-        android:background="@drawable/camara"
         android:onClick="tomarFoto"
         app:layout_constraintStart_toEndOf="@+id/img_nFoto"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_nLugar" />
+        app:layout_constraintTop_toBottomOf="@+id/lbl_nLugar"
+        style="@style/CameraButtonLand" />
 
     <Button
         android:id="@+id/btn_eGaleria"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="27dp"
-        android:background="@drawable/galeria"
         android:onClick="galeria"
         app:layout_constraintStart_toEndOf="@+id/img_nFoto"
-        app:layout_constraintTop_toBottomOf="@+id/btn_eCamara" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_eCamara"
+        style="@style/GalleryButtonLand" />
 
     <Button
         android:id="@+id/btn_nGuardar"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
         android:layout_marginEnd="348dp"
-        android:background="@drawable/save"
+        style="@style/SaveButtonStyle"
         android:onClick="actualizar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
