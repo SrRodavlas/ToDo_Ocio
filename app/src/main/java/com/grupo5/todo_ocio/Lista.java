@@ -51,14 +51,7 @@ public class Lista extends AppCompatActivity {
                         , puntero.getString(7)));
             } while(puntero.moveToNext());
         }
-        Log.i("Categoria", lugares.get(0).getCategoria());
-        Log.i("Categoria", lugares.get(1).getCategoria());
-        Log.i("Categoria", getString(R.string.spin_filtradoCine));
         db.close();
-
-        /*lugares.add(new Lugar(0, "Elemento", "Descripcion", "Parque",(float) 5.0, 37.404168,  -5.971336, "drawable/ic_action_save.png"));
-        lugares.add(new Lugar(1, "Elemento2", "Descripcion2", "Cine",(float) 2.5,37.394442, -5.983640, "drawable/ic_action_save.png"));
-        lugares.add(new Lugar(1, "Elemento3", "Descripcion3", "Restaurante",(float) 3.5,37.392736, -5.996429, "drawable/ic_action_save.png"));*/
 
         ListView lv = findViewById(R.id.lst_categorias);
         adaptador = new AdaptadorLugar(activity, new ArrayList<Lugar>());

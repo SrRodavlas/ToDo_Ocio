@@ -59,7 +59,7 @@ public class Mapa extends AppCompatActivity implements OnMapReadyCallback {
                         .title(Lista.lugares.get(x).getNombre())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
             }
-            if(restaurantes && Lista.lugares.get(x).getCategoria().equals(R.string.spin_filtradoRestaurante)){
+            if(restaurantes && Lista.lugares.get(x).getCategoria().equals(getString(R.string.spin_filtradoRestaurante))){
                 marcadores.add(new MarkerOptions().position(new LatLng(Lista.lugares.get(x).getLongitud(), Lista.lugares.get(x).getLatitud()))
                         .title(Lista.lugares.get(x).getNombre())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
