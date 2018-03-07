@@ -17,26 +17,26 @@
     <EditText
         android:id="@+id/txt_eBio"
         android:layout_width="341dp"
-        android:layout_height="136dp"
-        android:layout_marginBottom="12dp"
+        android:layout_height="164dp"
+        android:layout_marginBottom="36dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:ems="10"
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toTopOf="@+id/rtn_eBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent" />
 
     <RatingBar
         android:id="@+id/rtn_eBar"
         android:layout_width="wrap_content"
         android:layout_height="44dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="104dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toTopOf="@+id/img_eFoto"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
@@ -149,10 +149,13 @@
 
     <Button
         android:id="@+id/btn_eLocalizacion"
+        style="@style/mapButtonStyle"
+        android:layout_width="65dp"
+        android:layout_height="74dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="44dp"
         android:onClick="conseguirLocalicacion"
-        android:text="Button"
         app:layout_constraintBottom_toTopOf="@+id/mpv_eLocalizacion"
-        app:layout_constraintStart_toStartOf="parent"
-        style="@style/mapButtonStyle" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
