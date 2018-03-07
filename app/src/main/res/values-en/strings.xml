@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ToDo_Ocio</string>
+    <string name="lst_categorias">Categories</string>
+    <string name="btn_ver">See</string>
+    <string name="spin_filtradoCine">Cinemas</string>
+    <string name="spin_filtradoParque">Parks</string>
+    <string name="spin_filtradoRestaurante">Restaurants</string>
+    <string name="lbl_Nombre">First Name</string>
+    <string name="lbl_NombreLugar">...</string>
+    <string name="lbl_Bio">Add a description</string>
+    <string name="btn_guardar">Save</string>
+    <string name="diag_tituloBorrado">¡Clear log!</string>
+    <string name="diag_mensajeBorrado">"You are about to delete the record. Do you want to continue? "</string>
+    <string name="btn_confirmar">Yes</string>
+    <string name="btn_cancelar">No</string>
+    <string name="t_registroBorrado">"The record has been deleted. "</string>
+    <string name="lbl_vNombre">"Name of the place: "</string>
+    <string name="lbl_vBio">"Here is the description of the place provided "</string>
+    <string name="rdb_nCine">Cinema</string>
+    <string name="rdb_nParque">Park</string>
+    <string name="lbl_eNombre">"Name of the place: "</string>
+    <string name="rdb_nRestaurante">Restaurant</string>
+    <string name="lbl_eBio">"Here is the description of the place provided "</string>
+    <string name="btn_editar">Edit</string>
+    <string name="rdb_eCine">Cinema</string>
+    <string name="rdb_eParque">Park</string>
+    <string name="t_registroNuevo">"The place has been saved. "</string>
+    <string name="t_registroGuerdado">"The place has been updated. "</string>
+    <string name="t_imagenNoEscogida">"You have not chosen any image "</string>
+    <string name="Description">"Select photo of: "</string>
+    <string name="Camera">Camera</string>
+    <string name="Gallery">Gallery</string>
+    <string name="btn_mostrarMapa">"Show map "</string>
+</resources>

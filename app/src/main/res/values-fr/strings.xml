@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ToDo_Ocio</string>
+    <string name="lst_categorias">Categories</string>
+    <string name="btn_ver">Regarder</string>
+    <string name="spin_filtradoCine">Cinémas</string>
+    <string name="spin_filtradoParque">Les Parcs</string>
+    <string name="spin_filtradoRestaurante">Restaurants</string>
+    <string name="lbl_Nombre">Nom</string>
+    <string name="lbl_NombreLugar">...</string>
+    <string name="lbl_Bio">Ajouter une description</string>
+    <string name="btn_guardar">Sauvegarder</string>
+    <string name="diag_tituloBorrado">Supprimer l\'enregistrement!</string>
+    <string name="diag_mensajeBorrado">"Vous êtes sur le point de supprimer l'enregistrement. Voulez-vous continuer? "</string>
+    <string name="btn_confirmar">Oui</string>
+    <string name="btn_cancelar">Pas</string>
+    <string name="t_registroBorrado">"L'enregistrement a été supprimé. "</string>
+    <string name="lbl_vNombre">"Nom du lieu: "</string>
+    <string name="lbl_vBio">"Voici la description de l'endroit prévu "</string>
+    <string name="rdb_nCine">Cinéma</string>
+    <string name="rdb_nParque">Park</string>
+    <string name="lbl_eNombre">"Nom du lieu: "</string>
+    <string name="rdb_nRestaurante">Restaurant</string>
+    <string name="lbl_eBio">"Voici la description de l'endroit prévu "</string>
+    <string name="btn_editar">Modifier</string>
+    <string name="rdb_eCine">Cinéma</string>
+    <string name="rdb_eParque">Park</string>
+    <string name="t_registroNuevo">"L'endroit a été enregistré. "</string>
+    <string name="t_registroGuerdado">"L'endroit a été mis à jour. "</string>
+    <string name="t_imagenNoEscogida">"Vous n'avez choisi aucune image "</string>
+    <string name="Description">"Sélectionnez la photo de: "</string>
+    <string name="Camera">Caméra</string>
+    <string name="Gallery">Galerie</string>
+    <string name="btn_mostrarMapa">"Afficher la carte "</string>
+</resources>
