@@ -26,7 +26,7 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/edit"
         android:onClick="editar"
-        app:layout_constraintEnd_toStartOf="@+id/btn_nGuardar"
+        app:layout_constraintEnd_toStartOf="@+id/btn_eGuardar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

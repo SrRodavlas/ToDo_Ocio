@@ -8,7 +8,7 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/btn_nGuardar"
+        android:id="@+id/btn_eGuardar"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="19dp"
@@ -60,8 +60,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.google.android.gms.maps.MapView
+    <fragment
         android:id="@+id/mpv_vLocalizacion"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="160dp"
         android:layout_height="133dp"
         android:layout_marginEnd="16dp"

@@ -39,9 +39,6 @@
             android:parentActivityName=".Lista">
         </activity>
 
-        <activity android:name=".Nuevo"
-            android:parentActivityName=".Lista">
-        </activity>
         <activity
             android:name=".Ver"
             android:parentActivityName=".Lista" />
