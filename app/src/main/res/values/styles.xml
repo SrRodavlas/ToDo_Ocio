@@ -82,7 +82,7 @@
     <style name="mapButtonStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/mapButton</item>
+        <item name="android:background"> "@drawable/mapbutton"</item>
         <item name="android:layout_marginBottom">11dp</item>
         <item name="android:layout_marginStart">16dp</item>
     </style>
