@@ -149,13 +149,10 @@
 
     <Button
         android:id="@+id/btn_eLocalizacion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="11dp"
-        android:layout_marginStart="16dp"
         android:onClick="conseguirLocalicacion"
         android:text="Button"
         app:layout_constraintBottom_toTopOf="@+id/mpv_eLocalizacion"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/mapButtonStyle" />
 
 </android.support.constraint.ConstraintLayout>
