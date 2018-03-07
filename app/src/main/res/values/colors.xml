@@ -4,10 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="colorPrincipal">#dc4207</color>
-    <color name="colorPrincipalOscuro">#fabb4d</color>
-    <color name="colorEspecial">#c16916</color>
-    <color name="text_color_primario">#bebebe</color>
+    <color name="colorPrincipal">#d7721a</color>
+    <color name="colorPrincipalOscuro">#e68d35</color>
+    <color name="colorEspecial">#ffb57d</color>
+    <color name="text_color_primario">#000000</color>
 
 
 
