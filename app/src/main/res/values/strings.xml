@@ -39,13 +39,6 @@
     <string name="rdb_nParque">Parque</string>
     <string name="rdb_nRestaurante">Restaurante</string>
 
-    <!--activity_mapa-->
-
-    <string name="chk_cine">Cines</string>
-    <string name="chk_parque">Parques</string>
-    <string name="chk_restaurante">Restaurantes</string>
-    <string name="chk_todo">Todos</string>
-    <string name="mpv_mapa"></string>
 
     <!--activity_editar-->
 
