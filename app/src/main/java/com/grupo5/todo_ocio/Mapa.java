@@ -36,7 +36,7 @@ public class Mapa extends AppCompatActivity implements OnMapReadyCallback {
 
         categoria = getIntent().getExtras().getString("categoria");
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(R.id.frag_mapa);
         mapFragment.getMapAsync(this);
 
         marcadores = new ArrayList<>();

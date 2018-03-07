@@ -5,7 +5,7 @@
 
     <string name="lst_categorias">Categorias</string>
     <string name="btn_ver">Ver</string>
-    <string name="btn_buscar">Buscar</string>
+    <string name="btn_mostrarMapa">Mostrar mapa</string>
     <string name="vsb_scroll"></string>
     <string name="spin_filtradoTodo">Todos</string>
     <string name="spin_filtradoCine">Cines</string>
