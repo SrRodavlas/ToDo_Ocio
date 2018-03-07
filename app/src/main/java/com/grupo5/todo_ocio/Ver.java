@@ -1,18 +1,13 @@
 package com.grupo5.todo_ocio;
 
-
-
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,13 +18,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.grupo5.todo_ocio.BD.BBDD_Metodos_helper;
 
 import java.io.File;
 
@@ -42,11 +35,6 @@ public class Ver extends AppCompatActivity implements OnMapReadyCallback {
     private int posicion;
     private Activity activity = this;
 
-    //Para acceder a la BD se crea una instancia de la subclase SQLiteOpenHelper
-    final BBDD_Metodos_helper helper = new BBDD_Metodos_helper(this);
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +45,6 @@ public class Ver extends AppCompatActivity implements OnMapReadyCallback {
         txt_vBio = (EditText) findViewById(R.id.lbl_vBio);
         rtn_vBar = (RatingBar) findViewById(R.id.rtn_vBar);
         img_vFoto = (ImageView) findViewById(R.id.img_vFoto);
-        btn_Editar = (Button)findViewById(R.id.action_edit); //botón del menú barra
         posicion = getIntent().getExtras().getInt("posicion");
 
         txt_vNombreLugar.setText(txt_vNombreLugar.getText() + " "
@@ -77,60 +64,20 @@ public class Ver extends AppCompatActivity implements OnMapReadyCallback {
         else {
             img_vFoto.setImageDrawable(getDrawable(R.drawable.no_disponible));
         }
-
-
-
-
-        /*btn_Borrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {delete(v);}
-        });*/
-
-
-
-
-
-        //Eliminar registros base de datos al pulsar botón borrar
-//        btn_Borrar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                //Para poder modificar datos
-//                SQLiteDatabase db = helper.getWritableDatabase();
-//                // Define 'where' part of query.
-//                String selection = Estructura_BBDD.nombre + " LIKE ?";
-//                // Specify arguments in placeholder order.
-//                String[] selectionArgs = {txt_vNombreLugar.getText().toString()};
-//                // Issue SQL statement.
-//                db.delete(Estructura_BBDD.TABLE_NAME, selection, selectionArgs);
-//
-//                Toast.makeText(getApplicationContext(), "Datos eliminados",
-//                        Toast.LENGTH_SHORT).show();
-//
-//                txt_vNombreLugar.setText("");
-//                txt_vBio.setText("");
-//            }
-//        });
-
-//        edit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//            }
-//        });
     }
 
     public void onMapReady(GoogleMap googleMap) {
-        if(Lista.lugares.get(posicion).getCategoria().equals("Cine")){
+        if(Lista.lugares.get(posicion).getCategoria().equals(getString(R.string.spin_filtradoCine))){
             googleMap.addMarker(new MarkerOptions().position(new LatLng(Lista.lugares.get(posicion).getLongitud(), Lista.lugares.get(posicion).getLatitud()))
                     .title(Lista.lugares.get(posicion).getNombre())
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
         }
-        if(Lista.lugares.get(posicion).getCategoria().equals("Parque")){
+        if(Lista.lugares.get(posicion).getCategoria().equals(getString(R.string.spin_filtradoParque))){
             googleMap.addMarker(new MarkerOptions().position(new LatLng(Lista.lugares.get(posicion).getLongitud(), Lista.lugares.get(posicion).getLatitud()))
                     .title(Lista.lugares.get(posicion).getNombre())
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
         }
-        if(Lista.lugares.get(posicion).getCategoria().equals("Restaurante")){
+        if(Lista.lugares.get(posicion).getCategoria().equals(getString(R.string.spin_filtradoRestaurante))){
             googleMap.addMarker(new MarkerOptions().position(new LatLng(Lista.lugares.get(posicion).getLongitud(), Lista.lugares.get(posicion).getLatitud()))
                     .title(Lista.lugares.get(posicion).getNombre())
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
@@ -147,24 +94,13 @@ public class Ver extends AppCompatActivity implements OnMapReadyCallback {
        borrarLugar.setPositiveButton(R.string.btn_confirmar, new DialogInterface.OnClickListener() {
            @Override
            public void onClick(DialogInterface dialog, int which) {
-               //TODO Instruciones para borrar en la base de datos el registro
                Lista.sqlite.borrar(Lista.lugares.get(posicion));
-               /*//Para poder modificar datos
-               SQLiteDatabase db = helper.getWritableDatabase();
-               // Define 'where' part of query.
-               String selection = Estructura_BBDD.nombre + " LIKE ?";
-               // Specify arguments in placeholder order.
-               String[] selectionArgs = {txt_vNombreLugar.getText().toString()};
-               // Issue SQL statement.
-               db.delete(Estructura_BBDD.TABLE_NAME, selection, selectionArgs);*/
-               //Lista.lugares.remove(posicion);
                Toast.makeText(getApplicationContext(), R.string.t_registroBorrado,
                        Toast.LENGTH_SHORT).show();
                Intent i = new Intent(activity, Lista.class);
                startActivity(i);
            }
        });
-
        borrarLugar.setNegativeButton(R.string.btn_cancelar, new DialogInterface.OnClickListener() {
            @Override
            public void onClick(DialogInterface dialog, int which) {
@@ -174,52 +110,12 @@ public class Ver extends AppCompatActivity implements OnMapReadyCallback {
        borrarLugar.show();
    }
 
-
     //Funcionalidad del botón editar
     public void editar(View view){
-
         Intent i = new Intent(this, Editar.class);
-
-        //i.putExtra("nombre", txt_vNombreLugar.getText());
-        //i.putExtra("bio", txt_vBio.getText());
-        //i.putExtra("imagen",img_vFoto.getDrawingCache());
-
-        //obtener la imagen?--------------------------------------------------------------
-//        img_vFoto.buildDrawingCache();
-//        Bitmap bitmap = img_vFoto.getDrawingCache();
-//        OutputStream fileOutStream = null;
-//        Uri uri;
-//        try {
-//            File file = new File(Environment.getExternalStorageDirectory()
-//                    + File.separator + "imagenesguardadas" + File.separator);
-//            file.mkdirs();
-//            File directorioImagenes = new File(file, "mi_imagen.jpg");
-//            uri = Uri.fromFile(directorioImagenes);
-//            fileOutStream = new FileOutputStream(directorioImagenes);
-//        } catch (Exception e) {
-//            Log.e("ERROR!", e.getMessage());
-//        }
-//        try {
-//            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutStream);
-//            fileOutStream.flush();
-//            fileOutStream.close();
-//        } catch (Exception e) {
-//            Log.e("ERROR!", e.getMessage());
-//        }
-        //---------------------------------------------------------------------------------------------
         i.putExtra("posicion", posicion);
         i.putExtra("nuevo", false);
         startActivity(i);
-    }
-
-    //menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        if (super.onCreateOptionsMenu(menu)) return true;
-        else return false;
     }
 }
 

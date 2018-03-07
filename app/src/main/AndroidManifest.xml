@@ -23,7 +23,7 @@
         android:theme="@style/WhateverTheme">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key"/>
+            android:value="AIzaSyA0rDk_pY8d4eRC52hsBhs4VdX667nYIEk"/>
 
         <activity android:name=".Lista"
             android:theme="@style/WhateverTheme">

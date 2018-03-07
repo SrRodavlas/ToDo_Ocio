@@ -32,29 +32,25 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.grupo5.todo_ocio.BD.BBDD_Metodos_helper;
 import com.grupo5.todo_ocio.list.Lugar;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.text.DateFormat;
 import java.util.ArrayList;
 
 public class Editar extends AppCompatActivity implements OnMapReadyCallback, LocationListener {
     final String TAG = "GPS";
     private final static int ALL_PERMISSIONS_RESULT = 101;
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1;
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 60;
 
     private GoogleMap mapa;
     private LocationManager locationManager;
@@ -69,7 +65,6 @@ public class Editar extends AppCompatActivity implements OnMapReadyCallback, Loc
     private ImageView img_Foto;
     private RatingBar rtnBar;
     private RadioButton rdb_eCine, rdb_eParque, rdb_eRestaurante;
-    final BBDD_Metodos_helper helper = new BBDD_Metodos_helper(this);
     private Activity activity;
     private Bundle extras;
     private int posicion;
@@ -85,14 +80,6 @@ public class Editar extends AppCompatActivity implements OnMapReadyCallback, Loc
         StrictMode.setVmPolicy(builder.build());
 
         setContentView(R.layout.activity_editar);
-
-
-        // Bundle datosEditar = getIntent().getExtras();
-        //final String nombre = datosEditar.getString("nombre");
-        //String bio = datosEditar.getString("bio");
-
-        //txt_nombreLugar.setText(nombre);
-        //txt_bio.setText(bio);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!Settings.System.canWrite(this)) {
@@ -142,9 +129,9 @@ public class Editar extends AppCompatActivity implements OnMapReadyCallback, Loc
         if (!extras.getBoolean("nuevo")) {
             posicion = extras.getInt("posicion");
             imagen = Lista.lugares.get(posicion).getImagen();
-            if (Lista.lugares.get(posicion).getCategoria().equals("Cine")) {
+            if (Lista.lugares.get(posicion).getCategoria().equals(getString(R.string.spin_filtradoCine))) {
                 rdb_eCine.setChecked(true);
-            } else if (Lista.lugares.get(posicion).getCategoria().equals("Parque")) {
+            } else if (Lista.lugares.get(posicion).getCategoria().equals(getString(R.string.spin_filtradoParque))) {
                 rdb_eParque.setChecked(true);
             } else {
                 rdb_eRestaurante.setChecked(true);
@@ -165,17 +152,17 @@ public class Editar extends AppCompatActivity implements OnMapReadyCallback, Loc
     public void onMapReady(GoogleMap googleMap) {
         mapa = googleMap;
         if(!extras.getBoolean("nuevo")) {
-            if(Lista.lugares.get(posicion).getCategoria().equals("Cine")){
+            if(Lista.lugares.get(posicion).getCategoria().equals(getString(R.string.spin_filtradoCine))){
                 googleMap.addMarker(new MarkerOptions().position(new LatLng(Lista.lugares.get(posicion).getLongitud(), Lista.lugares.get(posicion).getLatitud()))
                         .title(Lista.lugares.get(posicion).getNombre())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
             }
-            if(Lista.lugares.get(posicion).getCategoria().equals("Parque")){
+            if(Lista.lugares.get(posicion).getCategoria().equals(getString(R.string.spin_filtradoParque))){
                 googleMap.addMarker(new MarkerOptions().position(new LatLng(Lista.lugares.get(posicion).getLongitud(), Lista.lugares.get(posicion).getLatitud()))
                         .title(Lista.lugares.get(posicion).getNombre())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
             }
-            if(Lista.lugares.get(posicion).getCategoria().equals("Restaurante")){
+            if(Lista.lugares.get(posicion).getCategoria().equals(getString(R.string.spin_filtradoRestaurante))){
                 googleMap.addMarker(new MarkerOptions().position(new LatLng(Lista.lugares.get(posicion).getLongitud(), Lista.lugares.get(posicion).getLatitud()))
                         .title(Lista.lugares.get(posicion).getNombre())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
@@ -222,37 +209,6 @@ public class Editar extends AppCompatActivity implements OnMapReadyCallback, Loc
         }
         return resultado;
     }
-       //Actualizar datos BD
-//        btn_Guardar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                SQLiteDatabase db = helper.getWritableDatabase();
-//
-//                // New value for one column
-//                ContentValues values = new ContentValues();
-//                values.put(Estructura_BBDD.nombre, txt_nombreLugar.getText().toString());
-//                values.put(Estructura_BBDD.bio, txt_bio.getText().toString());
-//                values.put(Estructura_BBDD.puntuacion, rtnBar.getNumStars());
-//
-//
-//                // Which row to update, based on the title
-//                //Esto debería hacerse con el id
-//                String selection = Estructura_BBDD.nombre + " LIKE ?";
-//                String[] selectionArgs = { txt_nombreLugar.getText().toString() };
-//
-//                int count = db.update(
-//                        Estructura_BBDD.TABLE_NAME,
-//                        values,
-//                        selection,
-//                        selectionArgs);
-//
-//                Toast.makeText(getApplicationContext(), "Datos actualizados",
-//                        Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
-
 
     public void tomarFoto (View v) {
         File carpetaFotos = new File(Environment.getExternalStorageDirectory(), "toDoOcio");
@@ -271,69 +227,64 @@ public class Editar extends AppCompatActivity implements OnMapReadyCallback, Loc
     }
 
     //Actualizar o insertar registro en la base de datos
-    public void actualizar (View v){
-        if(!extras.getBoolean("nuevo")) {
-            //TODO Actualiza el registro. Instrucciones para SQLite
-            Lista.lugares.get(posicion).setNombre("" + txt_nombreLugar.getText());
-            Lista.lugares.get(posicion).setDescripcion(("" + txt_bio.getText()));
-            if(rdb_eCine.isChecked()){
-                Lista.lugares.get(posicion).setCategoria("Cine");
-            } else if(rdb_eParque.isChecked()){
-                Lista.lugares.get(posicion).setCategoria("Parque");
+    public void actualizarGuardarRegistro(View v){
+        if(rdb_eCine.isChecked() || rdb_eParque.isChecked() || rdb_eRestaurante.isChecked()){
+            if(!extras.getBoolean("nuevo")) {
+                Lista.lugares.get(posicion).setNombre("" + txt_nombreLugar.getText());
+                Lista.lugares.get(posicion).setDescripcion(("" + txt_bio.getText()));
+                if(rdb_eCine.isChecked()){
+                    Lista.lugares.get(posicion).setCategoria(getString(R.string.spin_filtradoCine));
+                } else if(rdb_eParque.isChecked()){
+                    Lista.lugares.get(posicion).setCategoria(getString(R.string.spin_filtradoParque));
+                } else {
+                    Lista.lugares.get(posicion).setCategoria(getString(R.string.spin_filtradoRestaurante));
+                }
+                Lista.lugares.get(posicion).setPuntuacion(rtnBar.getRating());
+                Lista.lugares.get(posicion).setLongitud(loc.getLongitude());
+                Lista.lugares.get(posicion).setLatitud(loc.getLatitude());
+                Lista.lugares.get(posicion).setImagen(imagen);
+                Log.i("Categoria", Lista.lugares.get(posicion).getCategoria());
+                Lista.sqlite.actualizar(Lista.lugares.get(posicion));
+                Toast.makeText(getApplicationContext(), R.string.t_registroGuerdado,
+                        Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(activity, Lista.class);
+                startActivity(i);
             } else {
-                Lista.lugares.get(posicion).setCategoria("Restaurante");
+                Lugar nuevoLugar = new Lugar();
+                nuevoLugar.setNombre("" + txt_nombreLugar.getText());
+                nuevoLugar.setDescripcion("" + txt_bio.getText());
+                if(rdb_eCine.isChecked()){
+                    nuevoLugar.setCategoria(getString(R.string.spin_filtradoCine));
+                } else if(rdb_eParque.isChecked()){
+                    nuevoLugar.setCategoria(getString(R.string.spin_filtradoParque));
+                } else {
+                    nuevoLugar.setCategoria(getString(R.string.spin_filtradoRestaurante));
+                }
+                nuevoLugar.setPuntuacion(rtnBar.getRating());
+                nuevoLugar.setLongitud(loc.getLongitude());
+                nuevoLugar.setLatitud(loc.getLatitude());
+                nuevoLugar.setImagen(imagen);
+                Log.i("Categoria", nuevoLugar.getCategoria());
+                Lista.sqlite.insertar(nuevoLugar);
+                Toast.makeText(getApplicationContext(), R.string.t_registroNuevo,
+                        Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(activity, Lista.class);
+                startActivity(i);
             }
-            Lista.lugares.get(posicion).setPuntuacion(rtnBar.getRating());
-            Lista.lugares.get(posicion).setLongitud(loc.getLongitude());
-            Lista.lugares.get(posicion).setLatitud(loc.getLatitude());
-            Lista.lugares.get(posicion).setImagen(imagen);
-            Lista.sqlite.actualizar(Lista.lugares.get(posicion));
-            Toast.makeText(getApplicationContext(), R.string.t_registroGuerdado,
-                    Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(activity, Lista.class);
-            startActivity(i);
-        } else {
-            //TODO Nuevo registro. Instrucciones para SQLite
-            Lugar nuevoLugar = new Lugar();
-            nuevoLugar.setNombre("" + txt_nombreLugar.getText());
-            nuevoLugar.setDescripcion("" + txt_bio.getText());
-            if(rdb_eCine.isChecked()){
-                nuevoLugar.setCategoria("Cine");
-            } else if(rdb_eParque.isChecked()){
-                nuevoLugar.setCategoria("Parque");
-            } else {
-                nuevoLugar.setCategoria("Restaurante");
-            }
-            nuevoLugar.setPuntuacion(rtnBar.getRating());
-            nuevoLugar.setLongitud(loc.getLongitude());
-            nuevoLugar.setLatitud(loc.getLatitude());
-            nuevoLugar.setImagen(imagen);
-            Lista.sqlite.insertar(nuevoLugar);
-            Toast.makeText(getApplicationContext(), R.string.t_registroNuevo,
-                    Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(activity, Lista.class);
-            startActivity(i);
+        } else{
+            dialogoCategoria(getString(R.string.diag_categoriaMensajeGuardar));
         }
-        /*SQLiteDatabase db = helper.getWritableDatabase();
-
-        // New value for one column
-        ContentValues values = new ContentValues();
-        values.put(Estructura_BBDD.nombre, txt_nombreLugar.getText().toString());
-        values.put(Estructura_BBDD.bio, txt_bio.getText().toString());
-        values.put(Estructura_BBDD.puntuacion, rtnBar.getNumStars());
-
-
-        // Which row to update, based on the title
-        //Esto debería hacerse con el id, en este caso usa el nombre y actualiza ese registro en la BD
-        String selection = Estructura_BBDD.nombre + " LIKE ?";
-        String[] selectionArgs = { txt_nombreLugar.getText().toString() };
-
-        int count = db.update(
-                Estructura_BBDD.TABLE_NAME,
-                values,
-                selection,
-                selectionArgs);*/
     }
+
+    private void dialogoCategoria(String parteMensaje){
+        String mensaje = getString(R.string.diag_categoriaMensage) + " " + parteMensaje;
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle(R.string.diag_categoriaTitulo);
+        alertDialog.setMessage(mensaje);
+        alertDialog.setPositiveButton(R.string.dbtn_Aceptar, null);
+        alertDialog.show();
+    }
+
     @Override
     public void onLocationChanged(Location location) {
         Log.d(TAG, "onLocationChanged");
@@ -450,7 +401,7 @@ public class Editar extends AppCompatActivity implements OnMapReadyCallback, Loc
                 if (permissionsRejected.size() > 0) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         if (shouldShowRequestPermissionRationale(permissionsRejected.get(0))) {
-                            showMessageOKCancel("These permissions are mandatory for the application. Please allow access.",
+                            showMessageOKCancel(getString(R.string.diag_permisosMensaje),
                                     new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -474,16 +425,16 @@ public class Editar extends AppCompatActivity implements OnMapReadyCallback, Loc
 
     public void showSettingsAlert() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setTitle("GPS is not Enabled!");
-        alertDialog.setMessage("Do you want to turn on GPS?");
-        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        alertDialog.setTitle(R.string.diag_gpsTitulo);
+        alertDialog.setMessage(R.string.diag_gpsMensaje);
+        alertDialog.setPositiveButton(R.string.dbtn_Aceptar, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 startActivity(intent);
             }
         });
 
-        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton(R.string.dbtn_Cancelar, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
@@ -495,8 +446,8 @@ public class Editar extends AppCompatActivity implements OnMapReadyCallback, Loc
     private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
         new AlertDialog.Builder(this)
                 .setMessage(message)
-                .setPositiveButton("OK", okListener)
-                .setNegativeButton("Cancel", null)
+                .setPositiveButton( R.string.dbtn_Aceptar, okListener)
+                .setNegativeButton(R.string.dbtn_Cancelar, null)
                 .create()
                 .show();
     }
@@ -529,6 +480,10 @@ public class Editar extends AppCompatActivity implements OnMapReadyCallback, Loc
     }
 
     public void conseguirLocalicacion(View v){
-        getLocation();
+        if(rdb_eCine.isChecked() || rdb_eParque.isChecked() || rdb_eRestaurante.isChecked()){
+            getLocation();
+        } else {
+            dialogoCategoria(getString(R.string.diag_categoriaMensajeLocalizacion));
+        }
     }
 }

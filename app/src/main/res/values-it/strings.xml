@@ -7,7 +7,6 @@
     <string name="spin_filtradoParque">Parchi</string>
     <string name="spin_filtradoRestaurante">Ristoranti</string>
     <string name="lbl_Nombre">Nome</string>
-    <string name="lbl_NombreLugar">...</string>
     <string name="lbl_Bio">"Aggiungi una descrizione "</string>
     <string name="btn_guardar">Salvare</string>
     <string name="diag_tituloBorrado">Elimina record!</string>
@@ -32,4 +31,15 @@
     <string name="Camera">"Macchina fotografica "</string>
     <string name="Gallery">Galleria</string>
     <string name="btn_mostrarMapa">"Mostra la mappa "</string>
+    <string name="spin_filtradoTodo">Tutto</string>
+    <string name="diag_gpsTitulo">GPS disabilitato</string>
+    <string name="diag_gpsMensaje">Do you want to activate GPS?</string>
+    <string name="dbtn_Aceptar">Se</string>
+    <string name="dbtn_Cancelar">Non</string>
+    <string name="diag_permisosMensaje">Queste autorizzazioni sono necessarie per l\'applicazione. Si prega di consentire l\'accesso a loro.</string>
+    <string name="diag_categoriaTitulo">Categoria non selezionata</string>
+    <string name="diag_categoriaMensage">Devi selezionare una categoria per</string>
+    <string name="dbtn_categoriaAceptar">In conformità</string>
+    <string name="diag_categoriaMensajeGuardar">salva il record.</string>
+    <string name="diag_categoriaMensajeLocalizacion">ottenere la posizione.</string>
 </resources>

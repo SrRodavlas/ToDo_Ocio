@@ -25,7 +25,7 @@
         android:id="@+id/btn_eGuardar"
         android:layout_marginEnd="348dp"
         style="@style/SaveButtonStyle"
-        android:onClick="actualizar"
+        android:onClick="actualizarGuardarRegistro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -96,7 +96,8 @@
         style="@style/mapButtonStyle"
         android:layout_width="51dp"
         android:layout_height="55dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="12dp"
         android:onClick="conseguirLocalicacion"
         app:layout_constraintStart_toEndOf="@+id/mpv_eLocalizacion"
         app:layout_constraintTop_toBottomOf="@+id/lbl_eLugar" />

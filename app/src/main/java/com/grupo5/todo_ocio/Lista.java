@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -50,7 +51,9 @@ public class Lista extends AppCompatActivity {
                         , puntero.getString(7)));
             } while(puntero.moveToNext());
         }
-
+        Log.i("Categoria", lugares.get(0).getCategoria());
+        Log.i("Categoria", lugares.get(1).getCategoria());
+        Log.i("Categoria", getString(R.string.spin_filtradoCine));
         db.close();
 
         /*lugares.add(new Lugar(0, "Elemento", "Descripcion", "Parque",(float) 5.0, 37.404168,  -5.971336, "drawable/ic_action_save.png"));
@@ -82,7 +85,8 @@ public class Lista extends AppCompatActivity {
                 } else if(position == 1){ //Filtro de elementos de categoria cines
                     ArrayList<Lugar> lugaresCines = new ArrayList<>();
                     for(int x = 0; x < lugares.size(); x++){
-                        if(lugares.get(x).getCategoria().equals("Cine")){
+                        if(lugares.get(x).getCategoria().equals(getString(R.string.spin_filtradoCine))){
+                            Log.i("Categoria", lugares.get(x).getCategoria());
                             lugaresCines.add(lugares.get(x));
                         }
                     }
@@ -91,7 +95,8 @@ public class Lista extends AppCompatActivity {
                 } else if(position == 2){ //Filtro de elementos de categoria parques
                     ArrayList<Lugar> lugaresParques = new ArrayList<>();
                     for(int x = 0; x < lugares.size(); x++){
-                        if(lugares.get(x).getCategoria().equals("Parque")){
+                        if(lugares.get(x).getCategoria().equals(getString(R.string.spin_filtradoParque))){
+                            Log.i("Categoria", lugares.get(x).getCategoria());
                             lugaresParques.add(lugares.get(x));
                         }
                     }
@@ -100,7 +105,8 @@ public class Lista extends AppCompatActivity {
                 } else { //Filtro de elementos de categoria restaurantes
                     ArrayList<Lugar> lugaresRestaurantes = new ArrayList<>();
                     for(int x = 0; x < lugares.size(); x++){
-                        if(lugares.get(x).getCategoria().equals("Restaurante")){
+                        if(lugares.get(x).getCategoria().equals(getString(R.string.spin_filtradoRestaurante))){
+                            Log.i("Categoria", lugares.get(x).getCategoria());
                             lugaresRestaurantes.add(lugares.get(x));
                         }
                     }
@@ -115,8 +121,6 @@ public class Lista extends AppCompatActivity {
 
             }
         });
-
-        //getActionBar().setDisplayHomeAsUpEnabled(true);  //hace que pete?
     }
 
     //Funcionalidad del botón buscar
@@ -131,14 +135,5 @@ public class Lista extends AppCompatActivity {
         Intent i = new Intent(this, Editar.class);
         i.putExtra("nuevo", true);
         startActivity(i);
-    }
-
-    //menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return super.onCreateOptionsMenu(menu);
     }
 }

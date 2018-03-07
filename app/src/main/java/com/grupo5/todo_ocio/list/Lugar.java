@@ -1,7 +1,5 @@
 package com.grupo5.todo_ocio.list;
 
-import android.graphics.drawable.Drawable;
-
 public class Lugar {
     private int id;
     private String nombre, descripcion, categoria;

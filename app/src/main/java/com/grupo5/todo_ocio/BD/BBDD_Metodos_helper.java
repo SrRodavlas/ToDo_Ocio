@@ -1,6 +1,5 @@
 package com.grupo5.todo_ocio.BD;
 
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,10 +9,8 @@ import com.grupo5.todo_ocio.list.Lugar;
 import static com.grupo5.todo_ocio.BD.EsquemaLugar.EntradaLugar;
 
 public class BBDD_Metodos_helper extends SQLiteOpenHelper{
-
-    // If you change the database schema, you must increment the database version.
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "Lugares.db"; //poner el nombre de la BD si no es ese
+    public static final String DATABASE_NAME = "Lugares.db";
 
     public BBDD_Metodos_helper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -29,11 +26,6 @@ public class BBDD_Metodos_helper extends SQLiteOpenHelper{
             + EntradaLugar.LATITUD + " DOUBLE NOT NULL,"
             + EntradaLugar.IMAGEN + " TEXT NOT NULL,"
             + "UNIQUE (" + EntradaLugar.ID + "))");
-
-
-
-
-
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -48,12 +40,8 @@ public class BBDD_Metodos_helper extends SQLiteOpenHelper{
                 + EntradaLugar.LATITUD + " DOUBLE NOT NULL,"
                 + EntradaLugar.IMAGEN + " TEXT NOT NULL,"
                 + "UNIQUE (" + EntradaLugar.ID + "))");
-        /*db.execSQL(Estructura_BBDD.SQL_DELETE_ENTRIES);
-        onCreate(db);*/
     }
-    /*public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        onUpgrade(db, oldVersion, newVersion);
-    }*/
+
     public void insertar(Lugar lugar){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues registrar = new ContentValues();

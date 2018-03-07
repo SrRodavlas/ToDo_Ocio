@@ -9,10 +9,12 @@
 
     <Button
         android:id="@+id/btn_eGuardar"
-        android:onClick="actualizar"
+        style="@style/SaveButtonStyle"
+        android:layout_marginEnd="4dp"
+        android:layout_marginTop="16dp"
+        android:onClick="actualizarGuardarRegistro"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/SaveButtonStyle" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/txt_eBio"
@@ -87,9 +89,8 @@
     <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/id_eRadioGroup"
         android:layout_width="305dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="12dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
@@ -125,9 +126,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
-            android:textColor="@color/text_color_primario"
             android:checked="false"
             android:text="@string/rdb_nRestaurante"
+            android:textColor="@color/text_color_primario"
             app:layout_constraintStart_toEndOf="@+id/rdb_eParque"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -137,16 +138,19 @@
         android:id="@+id/btn_eCamara"
         style="@style/CameraButton"
         android:layout_marginEnd="12dp"
+        android:layout_marginTop="20dp"
         android:onClick="tomarFoto"
         app:layout_constraintEnd_toStartOf="@+id/btn_eGaleria"
         app:layout_constraintTop_toBottomOf="@+id/rtn_eBar" />
 
     <Button
         android:id="@+id/btn_eGaleria"
+        style="@style/GalleryButton"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="20dp"
         android:onClick="galeria"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rtn_eBar"
-        style="@style/GalleryButton" />
+        app:layout_constraintTop_toBottomOf="@+id/rtn_eBar" />
 
     <Button
         android:id="@+id/btn_eLocalizacion"

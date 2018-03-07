@@ -6,21 +6,15 @@
     <string name="lst_categorias">Categorias</string>
     <string name="btn_ver">Ver</string>
     <string name="btn_mostrarMapa">Mostrar mapa</string>
-    <string name="vsb_scroll"></string>
     <string name="spin_filtradoTodo">Todos</string>
     <string name="spin_filtradoCine">Cines</string>
     <string name="spin_filtradoParque">Parques</string>
     <string name="spin_filtradoRestaurante">Restaurantes</string>
-    <string name="btn_provisional">BtnProv</string> <!--este boton hace lo que haría seleccionar un elemento en la lista. provisional-->
 
     <!--activity_ver-->
 
     <string name="lbl_Nombre">Nombre</string>
-    <string name="lbl_NombreLugar">...</string>
     <string name="lbl_Bio">Añada una descripción</string>
-    <string name="mpv_Localizacion"></string>
-    <string name="rtnBar"></string>
-    <string name="img_Foto"></string>
     <string name="btn_guardar">Guardar</string>
     <string name="diag_tituloBorrado">¡Borrar registro!</string>
     <string name="diag_mensajeBorrado">Estás a punto de borrar el registro. ¿Deseas continuar?</string>
@@ -32,9 +26,6 @@
 
     <string name="lbl_vNombre">Nombre del lugar:</string>
     <string name="lbl_vBio">Aquí va la descripción del lugar proporcionada</string>
-    <string name="mpv_vLocalizacion"></string>
-    <string name="rtn_vBar"></string>
-    <string name="img_vFoto"></string>
     <string name="rdb_nCine">Cine</string>
     <string name="rdb_nParque">Parque</string>
     <string name="rdb_nRestaurante">Restaurante</string>
@@ -44,15 +35,17 @@
 
     <string name="lbl_eNombre">Nombre del lugar:</string>
     <string name="lbl_eBio">Aquí va la descripción del lugar proporcionada</string>
-    <string name="mpv_eLocalizacion"></string>
-    <string name="rtn_eBar"></string>
-    <string name="img_eFoto"></string>
     <string name="btn_editar">Editar</string>
     <string name="rdb_eCine">Cine</string>
     <string name="rdb_eParque">Parque</string>
     <string name="t_registroNuevo">El lugar ha sido guardado.</string>
     <string name="t_registroGuerdado">El lugar ha sido actualizado.</string>
     <string name="t_imagenNoEscogida">No has escogido ninguna imagen.</string>
+    <string name="diag_categoriaTitulo">Categoría no selecionada</string>
+    <string name="diag_categoriaMensage">Debes seleccionar una categoría para</string>
+    <string name="dbtn_categoriaAceptar">De acuerdo</string>
+    <string name="diag_categoriaMensajeGuardar">guardar el registro.</string>
+    <string name="diag_categoriaMensajeLocalizacion">obtener la posición.</string>
 
 
     <!--Dialog-->
@@ -60,18 +53,12 @@
     <string name="Description">Seleccionar foto de: </string>
     <string name="Camera">Cámara</string>
     <string name="Gallery">Galería</string>
-
-
-
-
-    <!--menu-->
-
-    <string name="action_save">action_save</string>
-    <string name="action_edit">action_edit</string>
-    <string name="action_delete">action_delete</string>
-
-    <!--MANIFEST-->
-    <string name="google_maps_key">AIzaSyA0rDk_pY8d4eRC52hsBhs4VdX667nYIEk</string>
-
+    
+    <!--Permisos-->
+    <string name="diag_gpsTitulo">GPS desactivado</string>
+    <string name="diag_gpsMensaje">¿Quieres activar el GPS?</string>
+    <string name="dbtn_Aceptar">Si</string>
+    <string name="dbtn_Cancelar">No</string>
+    <string name="diag_permisosMensaje">Estos permisos son necesario para la aplicación. Por favor permita el acceso a ellos.</string>
 
 </resources>
