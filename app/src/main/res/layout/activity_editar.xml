@@ -48,8 +48,8 @@
         android:id="@+id/img_eFoto"
         android:layout_width="160dp"
         android:layout_height="133dp"
-        android:layout_marginBottom="37dp"
-        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="36dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/btn_new" />
@@ -77,12 +77,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_eGuardar" />
 
-    <com.google.android.gms.maps.MapView
+    <fragment
         android:id="@+id/mpv_eLocalizacion"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="160dp"
         android:layout_height="133dp"
-        android:layout_marginBottom="38dp"
-        android:layout_marginStart="46dp"
+        android:layout_marginBottom="36dp"
+        android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -153,5 +154,16 @@
         android:onClick="galeria"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rtn_eBar" />
+
+    <Button
+        android:id="@+id/btn_eLocalizacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:layout_marginStart="16dp"
+        android:onClick="conseguirLocalicacion"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/mpv_eLocalizacion"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

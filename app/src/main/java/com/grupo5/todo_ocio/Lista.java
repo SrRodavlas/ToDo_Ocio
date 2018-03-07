@@ -3,6 +3,8 @@ package com.grupo5.todo_ocio;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -14,6 +16,8 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.grupo5.todo_ocio.BD.BBDD_Metodos_helper;
+import com.grupo5.todo_ocio.BD.EsquemaLugar;
 import com.grupo5.todo_ocio.list.AdaptadorLugar;
 import com.grupo5.todo_ocio.list.Lugar;
 
@@ -21,6 +25,7 @@ import java.util.ArrayList;
 
 public class Lista extends AppCompatActivity {
 
+    public static BBDD_Metodos_helper sqlite;
     public static ArrayList<Lugar> lugares;
     private Activity activity = this;
     private AdaptadorLugar adaptador;
@@ -34,9 +39,23 @@ public class Lista extends AppCompatActivity {
         //Carga la lista con la base de datos (prueba temporal hasta implementacion de base de datos)
         lugares = new ArrayList<Lugar>();
         //TODO Sacar de la base de datos los registros para la lista
-        lugares.add(new Lugar(0, "Elemento", "Descripcion", "Parque",(float) 5.0, 37.405456,  -5.970134, "drawable/ic_action_save.png"));
+        sqlite = new BBDD_Metodos_helper(this);
+        SQLiteDatabase db = sqlite.getWritableDatabase();
+        Cursor puntero = db.rawQuery("SELECT * from " + EsquemaLugar.EntradaLugar.NOMBRE_TABLE, null);
+        if(puntero.moveToFirst()){
+            do{
+                lugares.add(new Lugar(puntero.getInt(0), puntero.getString(1),
+                        puntero.getString(2), puntero.getString(3), puntero.getFloat(4)
+                        , puntero.getDouble(5), puntero.getDouble(6)
+                        , puntero.getString(7)));
+            } while(puntero.moveToNext());
+        }
+
+        db.close();
+
+        /*lugares.add(new Lugar(0, "Elemento", "Descripcion", "Parque",(float) 5.0, 37.404168,  -5.971336, "drawable/ic_action_save.png"));
         lugares.add(new Lugar(1, "Elemento2", "Descripcion2", "Cine",(float) 2.5,37.394442, -5.983640, "drawable/ic_action_save.png"));
-        lugares.add(new Lugar(1, "Elemento3", "Descripcion3", "Restaurante",(float) 3.5,37.392736, -5.996429, "drawable/ic_action_save.png"));
+        lugares.add(new Lugar(1, "Elemento3", "Descripcion3", "Restaurante",(float) 3.5,37.392736, -5.996429, "drawable/ic_action_save.png"));*/
 
         ListView lv = findViewById(R.id.lst_categorias);
         adaptador = new AdaptadorLugar(activity, new ArrayList<Lugar>());
@@ -110,6 +129,7 @@ public class Lista extends AppCompatActivity {
     //Funcionalidad del botón flotante (nuevo)
     public void nuevo(View view){
         Intent i = new Intent(this, Editar.class);
+        i.putExtra("nuevo", true);
         startActivity(i);
     }
 

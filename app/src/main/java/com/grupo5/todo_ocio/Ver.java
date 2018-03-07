@@ -135,7 +135,7 @@ public class Ver extends AppCompatActivity implements OnMapReadyCallback {
                     .title(Lista.lugares.get(posicion).getNombre())
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
         }
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(Lista.lugares.get(posicion).getLongitud(), Lista.lugares.get(posicion).getLatitud())));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Lista.lugares.get(posicion).getLongitud(), Lista.lugares.get(posicion).getLatitud()), 16.0f));
     }
 
     //Eliminar registros base de datos al pulsar botón borrar
@@ -148,6 +148,7 @@ public class Ver extends AppCompatActivity implements OnMapReadyCallback {
            @Override
            public void onClick(DialogInterface dialog, int which) {
                //TODO Instruciones para borrar en la base de datos el registro
+               Lista.sqlite.borrar(Lista.lugares.get(posicion));
                /*//Para poder modificar datos
                SQLiteDatabase db = helper.getWritableDatabase();
                // Define 'where' part of query.
@@ -207,6 +208,7 @@ public class Ver extends AppCompatActivity implements OnMapReadyCallback {
 //        }
         //---------------------------------------------------------------------------------------------
         i.putExtra("posicion", posicion);
+        i.putExtra("nuevo", false);
         startActivity(i);
     }
 
