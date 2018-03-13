@@ -111,6 +111,7 @@ public class Editar extends AppCompatActivity implements OnMapReadyCallback, Goo
         mpv_vLocalizacion.getMapAsync(this);
 
         if (!extras.getBoolean("nuevo")) {
+            estaUbicado = true;
             posicion = extras.getInt("posicion");
             imagen = Lista.lugares.get(posicion).getImagen();
             if (Lista.lugares.get(posicion).getCategoria().equals(getString(R.string.spin_filtradoCine))) {
