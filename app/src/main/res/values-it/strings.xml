@@ -39,7 +39,11 @@
     <string name="diag_permisosMensaje">Queste autorizzazioni sono necessarie per l\'applicazione. Si prega di consentire l\'accesso a loro.</string>
     <string name="diag_categoriaTitulo">Categoria non selezionata</string>
     <string name="diag_categoriaMensage">Devi selezionare una categoria per</string>
-    <string name="dbtn_categoriaAceptar">In conformità</string>
+    <string name="dbtn_GuardarAceptar">In conformità</string>
     <string name="diag_categoriaMensajeGuardar">salva il record.</string>
     <string name="diag_categoriaMensajeLocalizacion">ottenere la posizione.</string>
+    <string name="diag_localizadorTitulo">Senza localizzare il posto</string>
+    <string name="diag_localizadorMensaje">Missing position.</string>
+    <string name="diag_nombreTitulo">Nome vuoto</string>
+    <string name="diag_nombreMensaje">Inserisci un nome per il luogo.</string>
 </resources>

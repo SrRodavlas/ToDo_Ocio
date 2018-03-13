@@ -18,8 +18,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class AdaptadorLugar extends BaseAdapter {
-    protected Activity activity;
-    protected ArrayList<Lugar> items;
+    private Activity activity;
+    private ArrayList<Lugar> items;
 
     public AdaptadorLugar(Activity activity, ArrayList<Lugar> items) {
         this.activity = activity;
@@ -36,9 +36,7 @@ public class AdaptadorLugar extends BaseAdapter {
     }
 
     public void añadirTodo(ArrayList<Lugar> lugar) {
-        for (int i = 0; i < lugar.size(); i++) {
-            items.add(lugar.get(i));
-        }
+        items.addAll(lugar);
     }
 
     @Override
@@ -59,16 +57,18 @@ public class AdaptadorLugar extends BaseAdapter {
 
         Lugar dir = items.get(position);
 
-        TextView title = (TextView) itemView.findViewById(R.id.txt_TituloItem);
+        TextView title = itemView.findViewById(R.id.txt_TituloItem);
         title.setText(dir.getNombre());
 
-        RatingBar puntuacion = (RatingBar) itemView.findViewById(R.id.rtn_puntuacion);
+        RatingBar puntuacion = itemView.findViewById(R.id.rtn_puntuacion);
         puntuacion.setRating(dir.getPuntuacion());
 
-        ImageView imagen = (ImageView) itemView.findViewById(R.id.img_ImagenItem);
+        ImageView imagen = itemView.findViewById(R.id.img_ImagenItem);
         File fichero = new File(dir.getImagen());
         if(fichero.exists()) {
-            Bitmap bMap = BitmapFactory.decodeFile(fichero.getPath());
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inSampleSize = 8;
+            Bitmap bMap = BitmapFactory.decodeFile(fichero.getPath(), options);
             imagen.setImageBitmap(bMap);
         }
         else {

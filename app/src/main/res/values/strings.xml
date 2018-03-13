@@ -43,9 +43,13 @@
     <string name="t_imagenNoEscogida">No has escogido ninguna imagen.</string>
     <string name="diag_categoriaTitulo">Categoría no selecionada</string>
     <string name="diag_categoriaMensage">Debes seleccionar una categoría para</string>
-    <string name="dbtn_categoriaAceptar">De acuerdo</string>
     <string name="diag_categoriaMensajeGuardar">guardar el registro.</string>
     <string name="diag_categoriaMensajeLocalizacion">obtener la posición.</string>
+    <string name="diag_localizadorTitulo">Sin ubicar el lugar</string>
+    <string name="diag_localizadorMensaje">Falta posicionar el lugar.</string>
+    <string name="diag_nombreTitulo">Nombre vacío</string>
+    <string name="diag_nombreMensaje">Introduzca un nombre para el lugar.</string>
+    <string name="dbtn_GuardarAceptar">De acuerdo</string>
 
 
     <!--Dialog-->

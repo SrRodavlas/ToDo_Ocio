@@ -68,21 +68,21 @@ public class Ver extends AppCompatActivity implements OnMapReadyCallback {
 
     public void onMapReady(GoogleMap googleMap) {
         if(Lista.lugares.get(posicion).getCategoria().equals(getString(R.string.spin_filtradoCine))){
-            googleMap.addMarker(new MarkerOptions().position(new LatLng(Lista.lugares.get(posicion).getLongitud(), Lista.lugares.get(posicion).getLatitud()))
+            googleMap.addMarker(new MarkerOptions().position(new LatLng(Lista.lugares.get(posicion).getLatitud(), Lista.lugares.get(posicion).getLongitud()))
                     .title(Lista.lugares.get(posicion).getNombre())
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
         }
         if(Lista.lugares.get(posicion).getCategoria().equals(getString(R.string.spin_filtradoParque))){
-            googleMap.addMarker(new MarkerOptions().position(new LatLng(Lista.lugares.get(posicion).getLongitud(), Lista.lugares.get(posicion).getLatitud()))
+            googleMap.addMarker(new MarkerOptions().position(new LatLng(Lista.lugares.get(posicion).getLatitud(), Lista.lugares.get(posicion).getLongitud()))
                     .title(Lista.lugares.get(posicion).getNombre())
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
         }
         if(Lista.lugares.get(posicion).getCategoria().equals(getString(R.string.spin_filtradoRestaurante))){
-            googleMap.addMarker(new MarkerOptions().position(new LatLng(Lista.lugares.get(posicion).getLongitud(), Lista.lugares.get(posicion).getLatitud()))
+            googleMap.addMarker(new MarkerOptions().position(new LatLng(Lista.lugares.get(posicion).getLatitud(), Lista.lugares.get(posicion).getLongitud()))
                     .title(Lista.lugares.get(posicion).getNombre())
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
         }
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Lista.lugares.get(posicion).getLongitud(), Lista.lugares.get(posicion).getLatitud()), 16.0f));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Lista.lugares.get(posicion).getLatitud(), Lista.lugares.get(posicion).getLongitud()), 16.0f));
     }
 
     //Eliminar registros base de datos al pulsar botón borrar

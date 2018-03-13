@@ -44,23 +44,28 @@ public class Mapa extends AppCompatActivity implements OnMapReadyCallback {
         for (int x = 0; x < marcadores.size(); x++){
             googleMap.addMarker(marcadores.get(x));
         }
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(marcadores.get(0).getPosition()));
+        if (marcadores.size() > 0){
+            googleMap.moveCamera(CameraUpdateFactory.newLatLng(marcadores.get(0).getPosition()));
+        } else{
+            googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(40.4381311, -3.8196196)));
+        }
+
     }
 
     private void añadirMarcadores(boolean cines, boolean parques, boolean restaurantes){
         for (int x = 0; x < Lista.lugares.size(); x++){
             if(cines && Lista.lugares.get(x).getCategoria().equals(getString(R.string.spin_filtradoCine))){
-                marcadores.add(new MarkerOptions().position(new LatLng(Lista.lugares.get(x).getLongitud(), Lista.lugares.get(x).getLatitud()))
+                marcadores.add(new MarkerOptions().position(new LatLng(Lista.lugares.get(x).getLatitud(), Lista.lugares.get(x).getLongitud()))
                         .title(Lista.lugares.get(x).getNombre())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
             }
             if(parques && Lista.lugares.get(x).getCategoria().equals(getString(R.string.spin_filtradoParque))){
-                marcadores.add(new MarkerOptions().position(new LatLng(Lista.lugares.get(x).getLongitud(), Lista.lugares.get(x).getLatitud()))
+                marcadores.add(new MarkerOptions().position(new LatLng(Lista.lugares.get(x).getLatitud(), Lista.lugares.get(x).getLongitud()))
                         .title(Lista.lugares.get(x).getNombre())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
             }
             if(restaurantes && Lista.lugares.get(x).getCategoria().equals(getString(R.string.spin_filtradoRestaurante))){
-                marcadores.add(new MarkerOptions().position(new LatLng(Lista.lugares.get(x).getLongitud(), Lista.lugares.get(x).getLatitud()))
+                marcadores.add(new MarkerOptions().position(new LatLng(Lista.lugares.get(x).getLatitud(), Lista.lugares.get(x).getLongitud()))
                         .title(Lista.lugares.get(x).getNombre())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
             }

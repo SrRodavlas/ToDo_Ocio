@@ -2,20 +2,14 @@ package com.grupo5.todo_ocio;
 
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Service;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +17,9 @@ import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +29,12 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -44,23 +47,20 @@ import com.grupo5.todo_ocio.list.Lugar;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
-public class Editar extends AppCompatActivity implements OnMapReadyCallback, LocationListener {
-    final String TAG = "GPS";
-    private final static int ALL_PERMISSIONS_RESULT = 101;
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60;
+public class Editar extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
+    private static final String TAG = Editar.class.getSimpleName();
+    private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 1000;
+    private Location mLastLocation;
+    private GoogleApiClient mGoogleApiClient;
+    private boolean mRequestLocationUpdates = false;
+    private LocationRequest mLocationRequest;
+    private static int UPDATE_INTERVAL = 10000;
+    private static int FATEST_INTERVAL = 5000;
+    private static int DISPLACEMENT = 10;
     private GoogleMap mapa;
-    private LocationManager locationManager;
-    private Location loc;
-    private ArrayList<String> permissions = new ArrayList<>();
-    private ArrayList<String> permissionsToRequest;
-    private ArrayList<String> permissionsRejected = new ArrayList<>();
-    private boolean isGPS = false;
-    private boolean isNetwork = false;
-    private boolean canGetLocation = true;
     private TextView txt_nombreLugar, txt_bio;
     private ImageView img_Foto;
     private RatingBar rtnBar;
@@ -68,6 +68,9 @@ public class Editar extends AppCompatActivity implements OnMapReadyCallback, Loc
     private Activity activity;
     private Bundle extras;
     private int posicion;
+    private double latitud;
+    private double longitud;
+    private boolean estaUbicado;
     private String imagen;
 
 
@@ -96,30 +99,11 @@ public class Editar extends AppCompatActivity implements OnMapReadyCallback, Loc
         rdb_eRestaurante = findViewById(R.id.rdb_eRestaurante);
         activity = this;
         extras = getIntent().getExtras();
+        estaUbicado = false;
 
-        locationManager = (LocationManager) getSystemService(Service.LOCATION_SERVICE);
-        isGPS = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        isNetwork = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-
-        permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
-        permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
-        permissionsToRequest = findUnAskedPermissions(permissions);
-
-        if (!isGPS && !isNetwork) {
-            showSettingsAlert();
-            getLastLocation();
-        } else {
-            Log.d(TAG, "Connection on");
-            // check permissions
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (permissionsToRequest.size() > 0) {
-                    requestPermissions(permissionsToRequest.toArray(new String[permissionsToRequest.size()]),
-                            ALL_PERMISSIONS_RESULT);
-                    Log.d(TAG, "Permission requests");
-                    canGetLocation = false;
-                }
-            }
-            getLocation();
+        if (checkPlayServices()) {
+            buildGoogleApiClient();
+            createLocationRequest();
         }
 
         SupportMapFragment mpv_vLocalizacion = (SupportMapFragment) getSupportFragmentManager()
@@ -146,6 +130,8 @@ public class Editar extends AppCompatActivity implements OnMapReadyCallback, Loc
             } else {
                 img_Foto.setImageDrawable(getDrawable(R.drawable.no_disponible));
             }
+        } else {
+            imagen = "vacio";
         }
     }
 
@@ -153,21 +139,21 @@ public class Editar extends AppCompatActivity implements OnMapReadyCallback, Loc
         mapa = googleMap;
         if(!extras.getBoolean("nuevo")) {
             if(Lista.lugares.get(posicion).getCategoria().equals(getString(R.string.spin_filtradoCine))){
-                googleMap.addMarker(new MarkerOptions().position(new LatLng(Lista.lugares.get(posicion).getLongitud(), Lista.lugares.get(posicion).getLatitud()))
+                googleMap.addMarker(new MarkerOptions().position(new LatLng(Lista.lugares.get(posicion).getLatitud(), Lista.lugares.get(posicion).getLongitud()))
                         .title(Lista.lugares.get(posicion).getNombre())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
             }
             if(Lista.lugares.get(posicion).getCategoria().equals(getString(R.string.spin_filtradoParque))){
-                googleMap.addMarker(new MarkerOptions().position(new LatLng(Lista.lugares.get(posicion).getLongitud(), Lista.lugares.get(posicion).getLatitud()))
+                googleMap.addMarker(new MarkerOptions().position(new LatLng(Lista.lugares.get(posicion).getLatitud(), Lista.lugares.get(posicion).getLongitud()))
                         .title(Lista.lugares.get(posicion).getNombre())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
             }
             if(Lista.lugares.get(posicion).getCategoria().equals(getString(R.string.spin_filtradoRestaurante))){
-                googleMap.addMarker(new MarkerOptions().position(new LatLng(Lista.lugares.get(posicion).getLongitud(), Lista.lugares.get(posicion).getLatitud()))
+                googleMap.addMarker(new MarkerOptions().position(new LatLng(Lista.lugares.get(posicion).getLatitud(), Lista.lugares.get(posicion).getLongitud()))
                         .title(Lista.lugares.get(posicion).getNombre())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
             }
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Lista.lugares.get(posicion).getLongitud(), Lista.lugares.get(posicion).getLatitud()), 16.0f));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Lista.lugares.get(posicion).getLatitud(), Lista.lugares.get(posicion).getLongitud()), 16.0f));
         }
     }
 
@@ -228,262 +214,253 @@ public class Editar extends AppCompatActivity implements OnMapReadyCallback, Loc
 
     //Actualizar o insertar registro en la base de datos
     public void actualizarGuardarRegistro(View v){
-        if(rdb_eCine.isChecked() || rdb_eParque.isChecked() || rdb_eRestaurante.isChecked()){
-            if(!extras.getBoolean("nuevo")) {
-                Lista.lugares.get(posicion).setNombre("" + txt_nombreLugar.getText());
-                Lista.lugares.get(posicion).setDescripcion(("" + txt_bio.getText()));
-                if(rdb_eCine.isChecked()){
-                    Lista.lugares.get(posicion).setCategoria(getString(R.string.spin_filtradoCine));
-                } else if(rdb_eParque.isChecked()){
-                    Lista.lugares.get(posicion).setCategoria(getString(R.string.spin_filtradoParque));
+        if(rdb_eCine.isChecked() || rdb_eParque.isChecked() || rdb_eRestaurante.isChecked()) {
+            if(estaUbicado) {
+                String nombre = "" + txt_nombreLugar.getText();
+                if(!nombre.trim().equals("")){
+                    if(!extras.getBoolean("nuevo")) {
+                        Lista.lugares.get(posicion).setNombre(nombre);
+                        Lista.lugares.get(posicion).setDescripcion(("" + txt_bio.getText()));
+                        if(rdb_eCine.isChecked()){
+                            Lista.lugares.get(posicion).setCategoria(getString(R.string.spin_filtradoCine));
+                        } else if(rdb_eParque.isChecked()){
+                            Lista.lugares.get(posicion).setCategoria(getString(R.string.spin_filtradoParque));
+                        } else {
+                            Lista.lugares.get(posicion).setCategoria(getString(R.string.spin_filtradoRestaurante));
+                        }
+                        Lista.lugares.get(posicion).setPuntuacion(rtnBar.getRating());
+                        Lista.lugares.get(posicion).setLongitud(longitud);
+                        Lista.lugares.get(posicion).setLatitud(latitud);
+                        Lista.lugares.get(posicion).setImagen(imagen);
+                        Log.i("Categoria", Lista.lugares.get(posicion).getCategoria());
+                        Lista.sqlite.actualizar(Lista.lugares.get(posicion));
+                        Toast.makeText(getApplicationContext(), R.string.t_registroGuerdado,
+                                Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(activity, Lista.class);
+                        startActivity(i);
+                    } else {
+                        Lugar nuevoLugar = new Lugar();
+                        nuevoLugar.setNombre(nombre);
+                        nuevoLugar.setDescripcion("" + txt_bio.getText());
+                        if(rdb_eCine.isChecked()){
+                            nuevoLugar.setCategoria(getString(R.string.spin_filtradoCine));
+                        } else if(rdb_eParque.isChecked()){
+                            nuevoLugar.setCategoria(getString(R.string.spin_filtradoParque));
+                        } else {
+                            nuevoLugar.setCategoria(getString(R.string.spin_filtradoRestaurante));
+                        }
+                        nuevoLugar.setPuntuacion(rtnBar.getRating());
+                        nuevoLugar.setLongitud(longitud);
+                        nuevoLugar.setLatitud(latitud);
+                        nuevoLugar.setImagen(imagen);
+                        Log.i("Categoria", nuevoLugar.getCategoria());
+                        Lista.sqlite.insertar(nuevoLugar);
+                        Toast.makeText(getApplicationContext(), R.string.t_registroNuevo,
+                                Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(activity, Lista.class);
+                        startActivity(i);
+                    }
                 } else {
-                    Lista.lugares.get(posicion).setCategoria(getString(R.string.spin_filtradoRestaurante));
+                    dialogoCategoria(getString(R.string.diag_nombreTitulo),
+                            getString(R.string.diag_nombreMensaje));
                 }
-                Lista.lugares.get(posicion).setPuntuacion(rtnBar.getRating());
-                Lista.lugares.get(posicion).setLongitud(loc.getLongitude());
-                Lista.lugares.get(posicion).setLatitud(loc.getLatitude());
-                Lista.lugares.get(posicion).setImagen(imagen);
-                Log.i("Categoria", Lista.lugares.get(posicion).getCategoria());
-                Lista.sqlite.actualizar(Lista.lugares.get(posicion));
-                Toast.makeText(getApplicationContext(), R.string.t_registroGuerdado,
-                        Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(activity, Lista.class);
-                startActivity(i);
             } else {
-                Lugar nuevoLugar = new Lugar();
-                nuevoLugar.setNombre("" + txt_nombreLugar.getText());
-                nuevoLugar.setDescripcion("" + txt_bio.getText());
-                if(rdb_eCine.isChecked()){
-                    nuevoLugar.setCategoria(getString(R.string.spin_filtradoCine));
-                } else if(rdb_eParque.isChecked()){
-                    nuevoLugar.setCategoria(getString(R.string.spin_filtradoParque));
-                } else {
-                    nuevoLugar.setCategoria(getString(R.string.spin_filtradoRestaurante));
-                }
-                nuevoLugar.setPuntuacion(rtnBar.getRating());
-                nuevoLugar.setLongitud(loc.getLongitude());
-                nuevoLugar.setLatitud(loc.getLatitude());
-                nuevoLugar.setImagen(imagen);
-                Log.i("Categoria", nuevoLugar.getCategoria());
-                Lista.sqlite.insertar(nuevoLugar);
-                Toast.makeText(getApplicationContext(), R.string.t_registroNuevo,
-                        Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(activity, Lista.class);
-                startActivity(i);
+                dialogoCategoria(getString(R.string.diag_localizadorTitulo),
+                        getString(R.string.diag_localizadorMensaje));
             }
         } else{
-            dialogoCategoria(getString(R.string.diag_categoriaMensajeGuardar));
+            dialogoCategoria(getString(R.string.diag_categoriaTitulo),
+                    getString(R.string.diag_categoriaMensage) + " "
+                    + getString(R.string.diag_categoriaMensajeGuardar));
         }
     }
 
-    private void dialogoCategoria(String parteMensaje){
-        String mensaje = getString(R.string.diag_categoriaMensage) + " " + parteMensaje;
+    private void dialogoCategoria(String titulo, String mensaje){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setTitle(R.string.diag_categoriaTitulo);
+        alertDialog.setTitle(titulo);
         alertDialog.setMessage(mensaje);
-        alertDialog.setPositiveButton(R.string.dbtn_Aceptar, null);
+        alertDialog.setPositiveButton(R.string.dbtn_GuardarAceptar, null);
         alertDialog.show();
     }
 
     @Override
-    public void onLocationChanged(Location location) {
-        Log.d(TAG, "onLocationChanged");
-        updateUI(location);
-    }
-
-    @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {}
-
-    @Override
-    public void onProviderEnabled(String s) {
-        getLocation();
-    }
-
-    @Override
-    public void onProviderDisabled(String s) {
-        if (locationManager != null) {
-            locationManager.removeUpdates(this);
+    protected void onStart() {
+        super.onStart();
+        if (mGoogleApiClient != null) {
+            mGoogleApiClient.connect();
+            displayLocation();
+            Log.d("onStart ", "GoogleApiClient se ha creado");
         }
     }
 
-    private void getLocation() {
-        try {
-            if (canGetLocation) {
-                Log.d(TAG, "Can get location");
-                if (isGPS) {
-                    // from GPS
-                    Log.d(TAG, "GPS on");
-                    locationManager.requestLocationUpdates(
-                            LocationManager.GPS_PROVIDER,
-                            MIN_TIME_BW_UPDATES,
-                            MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
 
-                    if (locationManager != null) {
-                        loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                        if (loc != null)
-                            updateUI(loc);
-                    }
-                } else if (isNetwork) {
-                    // from Network Provider
-                    Log.d(TAG, "NETWORK_PROVIDER on");
-                    locationManager.requestLocationUpdates(
-                            LocationManager.NETWORK_PROVIDER,
-                            MIN_TIME_BW_UPDATES,
-                            MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkPlayServices();
+        if (mGoogleApiClient.isConnected() && mRequestLocationUpdates) {
+            startLocationUpdates();
+        }
+    }
 
-                    if (locationManager != null) {
-                        loc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                        if (loc != null)
-                            updateUI(loc);
-                    }
-                } else {
-                    loc.setLatitude(0);
-                    loc.setLongitude(0);
-                    updateUI(loc);
-                }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopLocationUpdates();
+    }
+
+
+    private void displayLocation() {
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+            if (checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+        }else{
+            //Do Your Stuff
+
+        }
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        Log.d("Ultima Ubicación ", "encontrada");
+        if (mLastLocation != null) {
+            latitud = mLastLocation.getLatitude();
+            longitud = mLastLocation.getLongitude();
+        } else {
+            latitud = 0.0;
+            longitud = 0.0;
+        }
+    }
+
+
+    private void togglePeriodLocationUpdates() {
+        if (!mRequestLocationUpdates) {
+            mRequestLocationUpdates = true;
+            startLocationUpdates();
+        }
+    }
+
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API).build();
+        Log.d("GoogleApiClient ", " se ha creado");
+    }
+
+    protected void createLocationRequest() {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(UPDATE_INTERVAL);
+        mLocationRequest.setFastestInterval(FATEST_INTERVAL);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setSmallestDisplacement(DISPLACEMENT);
+        Log.d("Solicitud de ubicacion", " es creado");
+    }
+
+    private boolean checkPlayServices() {
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (apiAvailability.isUserResolvableError(resultCode)) {
+                apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
+                        .show();
             } else {
-                Log.d(TAG, "Can't get location");
+                Log.i(TAG, "Este dispositivo no es compatible.");
+                finish();
             }
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void getLastLocation() {
-        try {
-            Criteria criteria = new Criteria();
-            String provider = locationManager.getBestProvider(criteria, false);
-            Location location = locationManager.getLastKnownLocation(provider);
-            Log.d(TAG, provider);
-            Log.d(TAG, location == null ? "NO LastLocation" : location.toString());
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private ArrayList findUnAskedPermissions(ArrayList<String> wanted) {
-        ArrayList result = new ArrayList();
-
-        for (String perm : wanted) {
-            if (!hasPermission(perm)) {
-                result.add(perm);
-            }
-        }
-
-        return result;
-    }
-
-    private boolean hasPermission(String permission) {
-        if (canAskPermission()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                return (checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED);
-            }
+            return false;
         }
         return true;
     }
 
-    private boolean canAskPermission() {
-        return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
+
+    protected void startLocationUpdates() {
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+            if (checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+        }else{
+
+        }
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest,this);
+        Log.d("La ubicación ", "está actualizada");
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case ALL_PERMISSIONS_RESULT:
-                Log.d(TAG, "onRequestPermissionsResult");
-                for (String perms : permissionsToRequest) {
-                    if (!hasPermission(perms)) {
-                        permissionsRejected.add(perms);
-                    }
-                }
+    protected void stopLocationUpdates() {
+        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+    }
 
-                if (permissionsRejected.size() > 0) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if (shouldShowRequestPermissionRationale(permissionsRejected.get(0))) {
-                            showMessageOKCancel(getString(R.string.diag_permisosMensaje),
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                                requestPermissions(permissionsRejected.toArray(
-                                                        new String[permissionsRejected.size()]), ALL_PERMISSIONS_RESULT);
-                                            }
-                                        }
-                                    });
-                            return;
-                        }
-                    }
-                } else {
-                    Log.d(TAG, "No rejected permissions.");
-                    canGetLocation = true;
-                    getLocation();
-                }
-                break;
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        displayLocation();
+        if (mRequestLocationUpdates) {
+            startLocationUpdates();
         }
     }
 
-    public void showSettingsAlert() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setTitle(R.string.diag_gpsTitulo);
-        alertDialog.setMessage(R.string.diag_gpsMensaje);
-        alertDialog.setPositiveButton(R.string.dbtn_Aceptar, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                startActivity(intent);
-            }
-        });
-
-        alertDialog.setNegativeButton(R.string.dbtn_Cancelar, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        alertDialog.show();
+    @Override
+    public void onConnectionSuspended(int i) {
+        mGoogleApiClient.connect();
     }
 
-    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
-        new AlertDialog.Builder(this)
-                .setMessage(message)
-                .setPositiveButton( R.string.dbtn_Aceptar, okListener)
-                .setNegativeButton(R.string.dbtn_Cancelar, null)
-                .create()
-                .show();
+    @Override
+    public void onLocationChanged(Location location) {
+        mLastLocation = location;
+        displayLocation();
+    }
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Log.i(TAG, "Conexion fallida: " + connectionResult.getErrorCode());
     }
 
-    private void updateUI(Location loc) {
+    private void updateUI() {
         if(mapa != null){
             mapa.clear();
             if(rdb_eCine.isChecked()){
-                mapa.addMarker(new MarkerOptions().position(new LatLng(loc.getLongitude(), loc.getLatitude()))
+                mapa.addMarker(new MarkerOptions().position(new LatLng(latitud, longitud))
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
             }
             if(rdb_eParque.isChecked()){
-                mapa.addMarker(new MarkerOptions().position(new LatLng(loc.getLongitude(), loc.getLatitude()))
+                mapa.addMarker(new MarkerOptions().position(new LatLng(latitud, longitud))
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
             }
             if(rdb_eRestaurante.isChecked()){
-                mapa.addMarker(new MarkerOptions().position(new LatLng(loc.getLongitude(), loc.getLatitude()))
+                mapa.addMarker(new MarkerOptions().position(new LatLng(latitud, longitud))
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
             }
-            mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(loc.getLongitude(), loc.getLatitude()), 16.0f));
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (locationManager != null) {
-            locationManager.removeUpdates(this);
+            mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitud, longitud), 16.0f));
         }
     }
 
     public void conseguirLocalicacion(View v){
         if(rdb_eCine.isChecked() || rdb_eParque.isChecked() || rdb_eRestaurante.isChecked()){
-            getLocation();
+            //getLocation();
+            ActivityCompat.requestPermissions(Editar.this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    1);
+
+            togglePeriodLocationUpdates();
+            updateUI();
+            if(!estaUbicado) {
+                estaUbicado = true;
+            }
         } else {
-            dialogoCategoria(getString(R.string.diag_categoriaMensajeLocalizacion));
+            dialogoCategoria(getString(R.string.diag_categoriaTitulo),
+                    getString(R.string.diag_categoriaMensage) + " "
+                            + getString(R.string.diag_categoriaMensajeLocalizacion));
         }
     }
 }
